@@ -1,4 +1,5 @@
 import PA1Helper
+-- import HelperFunctions
 import System.Environment (getArgs)
 
 -- Haskell representation of lambda expression
@@ -17,14 +18,14 @@ import System.Environment (getArgs)
 -- components of the structure.
 id' :: Lexp -> Lexp
 id' v@(Atom _) = v
-id' lexp@(Lambda _ _) = lexp
+id' lexp@(Lambda x y) = y
 id' lexp@(Apply _ _) = lexp 
 
 -- You will need to write a reducer that does something more than
 -- return whatever it was given, of course!
 
 reducer :: Lexp -> Lexp
-reducer lexp = lexp
+reducer lexp = id' lexp
 
 -- Entry point of program
 main = do
