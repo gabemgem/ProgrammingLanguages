@@ -1,5 +1,5 @@
 import PA1Helper
--- import HelperFunctions
+import HelperFunctions
 import System.Environment (getArgs)
 
 -- Haskell representation of lambda expression
@@ -25,7 +25,7 @@ id' lexp@(Apply _ _) = lexp
 -- return whatever it was given, of course!
 
 reducer :: Lexp -> Lexp
-reducer lexp = id' lexp
+reducer lexp = lexp
 
 -- Entry point of program
 main = do
