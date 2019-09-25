@@ -1,6 +1,4 @@
 import PA1Helper
-import HelperFunctions (alphaRename)
-import Reduction
 import System.Environment (getArgs)
 
 -- Haskell representation of lambda expression
@@ -27,8 +25,8 @@ id' lexp@(Apply _ _) = lexp
 
 reducer :: Lexp -> Lexp
 -- reducer lexp = alphaRename lexp
-reducer lexp = betaReduce (alphaRename lexp)
--- reducer lexp = etaConvert (betaReduce (alphaRename lexp))
+-- reducer lexp = betaReduce (alphaRename lexp)
+reducer lexp = etaConvert (betaReduce (alphaRename lexp))
 
 -- Entry point of program
 main = do

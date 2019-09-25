@@ -49,8 +49,14 @@ search lexp@(Apply a1 a2) str lexp2 = rexp where
     rexp = Apply (search a1 str lexp2) (search a2 str lexp2)
 
 etaConvert :: Lexp -> Lexp
-etaConvert lexp@(Lambda a1 a2) = rexp where
-    rexp = etaRedundant (Atom a1) a2
+etaConvert lexp@(Lambda a1 a2) = let
+    rexp = etaRedundant (Atom a1) a2 in
+    if rexp == lexp
+        then rexp
+        else etaConvert (alphaRename rexp)
+
+etaConvert lexp@(Apply a1 a2) = rexp where
+    rexp = Apply (etaConvert a1) (etaConvert a2)
 
 etaConvert lexp = lexp
 
@@ -58,7 +64,7 @@ etaRedundant :: Lexp -> Lexp -> Lexp
 etaRedundant lexp@(Atom v) lexp2@(Apply a1 a2) =
     if lexp == a2
         then a1
-        else Lambda v a2
+        else Lambda v lexp2
 
 etaRedundant lexp@(Atom v) lexp2 = Lambda v lexp2
 

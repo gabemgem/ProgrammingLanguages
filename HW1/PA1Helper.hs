@@ -1,4 +1,4 @@
-module PA1Helper(runProgram,Lexp(..)) where
+module PA1Helper(runProgram,Lexp(..),alphaRename,betaReduce,etaConvert) where
 
 import System.Directory
 import System.Environment
@@ -9,6 +9,10 @@ import Text.Parsec.Expr
 import Text.Parsec.Token
 import Text.Parsec.Language
 import Text.Parsec.Char
+import qualified Data.Set as Set
+import Data.List as List
+import Data.Map (Map)
+import qualified Data.Map as Map
 
 -- Haskell representation of lambda expression
 data Lexp = Atom String | Lambda String Lexp | Apply Lexp Lexp deriving Eq
@@ -124,3 +128,149 @@ runProgram inFile outFile reducer = do
     let inList = lines fcontents
     sequence_ (zipWith (handler reducer outFile) [1..] inList)
 
+
+
+
+
+
+posStrings = ["a","b","c","d","e","f","g"
+              ,"h","i","j","k","l","m","n"
+              ,"o","p","q","r","s","t","u"
+              ,"v","w","x","y","z"]
+
+alphaRename :: Lexp -> Lexp
+alphaRename lexp@(Atom x) = lexp
+alphaRename lexp@(Lambda x y) = rexp where
+    rexp = Lambda x (alphaRename y)
+alphaRename lexp@(Apply e1 e2) = rexp where
+    sTotal = alphaSearch lexp Set.empty
+    se1 = alphaSearch e1 Set.empty
+    se2 = alphaSearch e2 Set.empty
+    sIntersect = Set.intersection se1 se2
+    rexp = if sIntersect == Set.empty
+        then lexp
+        else rexp2 where
+            newStrings = alphaPicker posStrings sTotal (Set.size sIntersect)
+            rexp2 = Apply (alphaHelper0 ((Set.toList sIntersect), newStrings, e1)) e2
+
+alphaSearch :: Lexp -> Set.Set String -> Set.Set String
+alphaSearch lexp@(Atom str) s = newS where
+    newS = Set.insert str s
+alphaSearch lexp@(Lambda x y) s = newS where
+    s1 = Set.insert x s
+    newS = alphaSearch y s1
+alphaSearch lexp@(Apply x y) s = newS where
+    s1 = alphaSearch x s
+    newS = alphaSearch y s1
+
+alphaPicker :: [String] -> Set.Set String -> Int -> [String]
+alphaPicker posStrings@(h:t) takenStrings num = newString where
+    newString = if Set.member h takenStrings
+        then alphaPicker t takenStrings num
+        else if num == 1
+            then [h]
+            else h:(alphaPicker t (Set.deleteMin takenStrings) (num - 1) )
+
+-- Tuple is ([stringsToRename], [newStrings], Lexp)
+alphaHelper0 :: ([String], [String], Lexp) -> Lexp
+alphaHelper0 ([], [], lexp) = lexp
+alphaHelper0 (h1:t1, b@(h2:t2), lexp) = rexp where
+    rexp1 = alphaHelper0 (t1, t2, lexp)
+    rexp = aHLookButDontReplace (h1, h2, rexp1)
+
+aHLookButDontReplace :: (String, String, Lexp) -> Lexp
+aHLookButDontReplace (a, b, v@(Atom currentString)) = v
+aHLookButDontReplace (a, b, t@(Lambda x y)) = rexp where
+    rexp = if x == a
+        then Lambda b (aHLookAndReplace (a, b, y))
+        else Lambda x (aHLookButDontReplace (a, b, y))
+aHLookButDontReplace (a, b, t@(Apply x y)) = Apply (aHLookButDontReplace (a, b, x)) (aHLookButDontReplace (a, b, y))
+
+aHLookAndReplace :: (String, String, Lexp) -> Lexp
+aHLookAndReplace (a, b, v@(Atom currentString)) = Atom (aHReplace (a, b, currentString))
+aHLookAndReplace (a, b, t@(Lambda x y)) = rexp where
+    rexp = if x == a
+        then t
+        else Lambda x (aHLookAndReplace (a, b, y))
+aHLookAndReplace (a, b, t@(Apply x y)) = Apply (aHLookAndReplace (a, b, x)) (aHLookAndReplace (a, b, y))
+
+-- Tuple structure is (stringToReplace, replacementString, currentString)
+aHReplace :: (String, String, String) -> String
+aHReplace (a, b, c) = if c == a
+    then b
+    else c
+
+
+
+
+
+
+
+--betaReduction for outermost Apply (call for beta reduction here)
+--should always look for Apply within Lambda statemets
+betaReduce :: Lexp -> Lexp
+betaReduce lexp@(Lambda e1 e2) = rexp where
+    rexp = Lambda e1 (betaReduce e2)
+
+betaReduce lexp@(Apply e1 e2) = let
+    rexp = replace e1 e2 in
+    if rexp == lexp
+        then rexp
+        else betaReduce (alphaRename rexp)
+betaReduce lexp@(Atom v) = lexp
+
+
+--takes letter string from Lambda and search function to replace token
+--should always look for Lambda (inside of Apply)
+replace :: Lexp -> Lexp  -> Lexp
+replace lexp@(Lambda a1 a2) lexp2 = rexp where
+    rexp = search a2 a1 lexp2
+
+replace lexp@(Apply a1 a2) lexp2 = Apply (betaReduce lexp) lexp2
+
+--Return the original apply?
+replace lexp lexp2 = Apply lexp lexp2
+
+
+
+
+--if expression is an atom, replace with apply expression if token matches
+search :: Lexp -> String -> Lexp -> Lexp
+search lexp@(Atom v) str lexp2 = 
+    if v == str
+        then lexp2
+        else Atom v
+
+-- return if searching lambda function, return lambda with reduced arg2
+search lexp@(Lambda a1 a2) str lexp2 = Lambda a1 (search a2 str lexp2)
+
+-- return 
+search lexp@(Apply a1 a2) str lexp2 = rexp where
+    rexp = Apply (search a1 str lexp2) (search a2 str lexp2)
+
+etaConvert :: Lexp -> Lexp
+etaConvert lexp@(Lambda a1 a2) = let
+    rexp = etaRedundant (Atom a1) a2 in
+    if rexp == lexp
+        then rexp
+        else etaConvert (alphaRename rexp)
+
+etaConvert lexp@(Apply a1 a2) = rexp where
+    rexp = Apply (etaConvert a1) (etaConvert a2)
+
+etaConvert lexp = lexp
+
+etaRedundant :: Lexp -> Lexp -> Lexp
+etaRedundant lexp@(Atom v) lexp2@(Apply a1 a2) =
+    if lexp == a2
+        then a1
+        else Lambda v lexp2
+
+etaRedundant lexp@(Atom v) lexp2 = Lambda v lexp2
+
+
+--Function to take Lambda and Lexp, add Lambda letter and Lexp to map
+--Function to take exp from lambda
+    -- If apply, replace again
+    -- If lambda, do nothing and look into expression
+    -- If atom is seen, check to see if  
