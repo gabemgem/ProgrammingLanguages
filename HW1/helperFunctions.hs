@@ -1,4 +1,4 @@
-module HelperFunctions(alpha) where
+module HelperFunctions(alphaRename) where
 
 import PA1Helper
 import qualified Data.Set as Set
@@ -9,11 +9,11 @@ posStrings = ["a","b","c","d","e","f","g"
               ,"o","p","q","r","s","t","u"
               ,"v","w","x","y","z"]
 
-alpha :: Lexp -> Lexp
-alpha lexp@(Atom x) = lexp
-alpha lexp@(Lambda x y) = rexp where
-    rexp = Lambda x (alpha y)
-alpha lexp@(Apply e1 e2) = rexp where
+alphaRename :: Lexp -> Lexp
+alphaRename lexp@(Atom x) = lexp
+alphaRename lexp@(Lambda x y) = rexp where
+    rexp = Lambda x (alphaRename y)
+alphaRename lexp@(Apply e1 e2) = rexp where
     sTotal = alphaSearch lexp Set.empty
     se1 = alphaSearch e1 Set.empty
     se2 = alphaSearch e2 Set.empty

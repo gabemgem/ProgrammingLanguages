@@ -1,5 +1,7 @@
 x
 \x.x
 (x y)
-(\a.a x)
-(\x.\a.(x a) y)
+x
+y
+(x y)
+\x.x
