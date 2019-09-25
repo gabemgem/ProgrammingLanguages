@@ -19,3 +19,5 @@ HW1/dist-newstyle/cache/compiler
 HW1/dist-newstyle/cache/elaborated-plan
 HW1/dist-newstyle/cache/plan.json
 HW1/dist-newstyle/cache/source-hashes
+cabalPackages.txt
+HW1/output.lambda
