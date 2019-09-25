@@ -131,7 +131,7 @@ runProgram inFile outFile reducer = do
 
 
 
-
+--------------------------------------ALPHA RENAMING--------------------------------------
 
 posStrings = ["a","b","c","d","e","f","g"
               ,"h","i","j","k","l","m","n"
@@ -201,40 +201,39 @@ aHReplace (a, b, c) = if c == a
     else c
 
 
-
-
-
+--------------------------------------BETA REDUCTION--------------------------------------
 
 
 --betaReduction for outermost Apply (call for beta reduction here)
 --should always look for Apply within Lambda statemets
 betaReduce :: Lexp -> Lexp
 betaReduce lexp@(Lambda e1 e2) = rexp where
-    rexp = Lambda e1 (betaReduce e2)
+    rexp = Lambda e1 (betaReduce (alphaRename e2))
 
-betaReduce lexp@(Apply e1 e2) = let
-    rexp = replace e1 e2 in
-    if rexp == lexp
-        then rexp
-        else betaReduce (alphaRename rexp)
+betaReduce lexp@(Apply e1 e2) = rexp where
+    rexp1 = replace e1 e2
+    rexp = if rexp1 == lexp
+        then rexp1
+        else betaReduce (alphaRename rexp1)
 betaReduce lexp@(Atom v) = lexp
 
 
 --takes letter string from Lambda and search function to replace token
 --should always look for Lambda (inside of Apply)
 replace :: Lexp -> Lexp  -> Lexp
+-- beta reduce second lexp
+replace a@(Atom v) lexp2 = Apply a (betaReduce (alphaRename lexp2))
+-- beta reduce elements of apply
+replace lexp1@(Apply x y) lexp2 = Apply (betaReduce (alphaRename lexp1)) (betaReduce (alphaRename lexp2))
+-- Interesting case
 replace lexp@(Lambda a1 a2) lexp2 = rexp where
     rexp = search a2 a1 lexp2
 
-replace lexp@(Apply a1 a2) lexp2 = Apply (betaReduce lexp) lexp2
-
---Return the original apply?
-replace lexp lexp2 = Apply lexp lexp2
 
 
 
-
---if expression is an atom, replace with apply expression if token matches
+-- if expression is an atom, replace with apply expression if token matches
+-- input is lexp from the lambda, atom from lambda, lexp to substitute
 search :: Lexp -> String -> Lexp -> Lexp
 search lexp@(Atom v) str lexp2 = 
     if v == str
@@ -248,6 +247,10 @@ search lexp@(Lambda a1 a2) str lexp2 = Lambda a1 (search a2 str lexp2)
 search lexp@(Apply a1 a2) str lexp2 = rexp where
     rexp = Apply (search a1 str lexp2) (search a2 str lexp2)
 
+
+--------------------------------------ETA CONVERSION--------------------------------------
+
+
 etaConvert :: Lexp -> Lexp
 etaConvert lexp@(Lambda a1 a2) = let
     rexp = etaRedundant (Atom a1) a2 in
@@ -258,17 +261,29 @@ etaConvert lexp@(Lambda a1 a2) = let
 etaConvert lexp@(Apply a1 a2) = rexp where
     rexp = Apply (etaConvert a1) (etaConvert a2)
 
-etaConvert lexp = lexp
+etaConvert lexp@(Atom v) = lexp
 
 etaRedundant :: Lexp -> Lexp -> Lexp
 etaRedundant lexp@(Atom v) lexp2@(Apply a1 a2) =
     if lexp == a2
-        then a1
+        then if etaCheckForX a1 v
+          then a1
+          else Lambda v lexp2
         else Lambda v lexp2
 
 etaRedundant lexp@(Atom v) lexp2 = Lambda v lexp2
 
-
+etaCheckForX :: Lexp -> String -> Bool
+etaCheckForX lexp@(Atom v) str = 
+  if v == str
+    then False
+    else True
+etaCheckForX lexp@(Lambda x y) str =
+  if x == str
+    then True
+    else etaCheckForX y str
+etaCheckForX lexp@(Apply x y) str = 
+  etaCheckForX x str && etaCheckForX y str
 --Function to take Lambda and Lexp, add Lambda letter and Lexp to map
 --Function to take exp from lambda
     -- If apply, replace again
