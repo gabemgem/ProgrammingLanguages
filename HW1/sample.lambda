@@ -1,7 +1,4 @@
-x
-\x.hello
-(\x.x y)
-(\x.\y.(x y) (y w))
+(\x.\y.(y x) (y w))
 (\x.\y.(x y) (y w))
 (\x.x y)
 \x.(y x)

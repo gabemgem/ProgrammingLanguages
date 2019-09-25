@@ -26,7 +26,9 @@ id' lexp@(Apply _ _) = lexp
 -- return whatever it was given, of course!
 
 reducer :: Lexp -> Lexp
-reducer lexp = etaConvert (betaReduce (alphaRename lexp))
+-- reducer lexp = alphaRename lexp
+reducer lexp = betaReduce (alphaRename lexp)
+-- reducer lexp = etaConvert (betaReduce (alphaRename lexp))
 
 -- Entry point of program
 main = do
