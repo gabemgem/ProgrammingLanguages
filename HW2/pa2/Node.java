@@ -301,7 +301,7 @@ public class Node extends UniversalActor  {
 			}
 }			connections.add(nd);
 		}
-		public String printAddConnection(String connId) {
+		public String printAddConnection(int connId) {
 			return "Node "+nodeId+" adding connection to node "+connId+"\n";
 		}
 		public void printId() {
@@ -314,8 +314,8 @@ public class Node extends UniversalActor  {
 				}
 			}
 }		}
-		public String getNodeId() {
-			return Integer.toString(nodeId);
+		public int getNodeId() {
+			return nodeId;
 		}
 	}
 }

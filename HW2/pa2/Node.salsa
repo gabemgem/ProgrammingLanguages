@@ -27,15 +27,15 @@ behavior Node{
 		connections.add(nd);
 	}
 
-	String printAddConnection(String connId) {
-		return "Node "+nodeId+" adding connection to node "+connId+"\n";
+	String printAddConnection(int connId) {
+		return "Node "+nodeId+" adding connection to node "+connId;
 	}
 
 	void printId() {
 		if(isDebug) standardOutput <- println(nodeId);
 	}
 
-	String getNodeId() {
-		return Integer.toString(nodeId);
+	int getNodeId() {
+		return nodeId;
 	}
 }
