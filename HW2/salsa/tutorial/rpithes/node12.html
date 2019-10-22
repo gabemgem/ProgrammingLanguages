@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Message Passing</TITLE>
+<META NAME="description" CONTENT="Message Passing">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" HREF="node9.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html286"
+  HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html282"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html276"
+  HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html284"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html287"
+  HREF="node13.html">Coordinating Concurrency</A>
+<B> Up:</B> <A NAME="tex2html283"
+  HREF="node9.html">Writing Concurrent Programs</A>
+<B> Previous:</B> <A NAME="tex2html277"
+  HREF="node11.html">Actor Creation</A>
+ &nbsp; <B>  <A NAME="tex2html285"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00430000000000000000">
+Message Passing</A>
+</H1>
+SALSA uses asynchronous message passing as its primitive form of communication. 
+A SALSA<SPAN  CLASS="textit">message handler</SPAN> is similar to a Java method.
+Message passing in SALSA is implemented by  
+asynchronous message delivery with 
+dynamic method invocation. The following example 
+shows how an actor sends a message to itself. 
+Note that it is not a Java method invocation:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+handler();  // equivalent to "self &lt;- handler();"
+  
+   </pre></td></tr>
+  </table> 
+Another type of message passing statement 
+requires a target (an actor reference), 
+a reserved token <TT>&lt;-</TT>, 
+and a message handler with arguments to be sent. 
+For instance, an actor can send a message to 
+the standardOutput actor as follows:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+// send a method println() with an argument "Hello World", 
+// to the actor standardOutput.
+standardOutput &lt;- println("Hello World"); 
+  
+   </pre></td></tr>
+  </table> 
+Note that the following expression is illegal 
+because it is neither  
+a Java method invocation nor a 
+message passing expression:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+// Wrong! It does not compile!!!
+self &lt;- someObject.someHandler();
+  
+   </pre></td></tr>
+  </table> 
+Message Passing in SALSA is by-value 
+for objects, and 
+by-reference for actors. Any object
+passed as an argument is cloned at the moment it 
+is sent, and the cloned object is then sent to the target actor.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Named Tokens</TITLE>
+<META NAME="description" CONTENT="Named Tokens">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node39.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="node37.html">
+<LINK REL="next" HREF="node39.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html622"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html618"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html612"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html620"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html623"
+  HREF="node39.html">Join Block Continuations</A>
+<B> Up:</B> <A NAME="tex2html619"
+  HREF="node37.html">Advanced Concurrency Coordination</A>
+<B> Previous:</B> <A NAME="tex2html613"
+  HREF="node37.html">Advanced Concurrency Coordination</A>
+ &nbsp; <B>  <A NAME="tex2html621"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00610000000000000000"></A>
+<A NAME="Named_Tokens"></A>
+<BR>
+Named Tokens
+</H1>
+Chapter&nbsp;<A HREF="node9.html#Writing_Concurrent_Programs"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> has introduced token-passing 
+continuations with the reserved keyword
+<TT>token</TT>. In this section, 
+we will focus on the other type of continuations, 
+the <SPAN  CLASS="textit">named tokens</SPAN>.
+
+<P>
+In SALSA, the return value of the asynchronous message can be declared 
+as a variable with type <TT>token</TT>. The variable is 
+called a <SPAN  CLASS="textit">named token</SPAN>. Named tokens are designed to more flexibly tell 
+the SALSA run-time environment how to continue certain computations.
+For example, a token-passing continuation statement can be re-written by name token continuations:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+3#3
+  
+   </pre></td></tr>
+  </table> 
+Name tokens can be used to construct a non-linear partial order for computation,
+which cannot be expressed by token-passing continuations.
+The following example cannot be re-written by token-passing continuations:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+4#4
+  
+   </pre></td></tr>
+  </table> 
+The following example uses name tokens to implement the Fibonacci number application:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+5#5
+  
+   </pre></td></tr>
+  </table> 
+Named tokens may be assigned to non-primitive type values, 
+message sending expressions, or other named tokens. 
+Examples are shown as follows:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+1. token y  = a&lt;-m1();
+2.
+3. token z = y;
+4.
+5. y = b&lt;-m2(y);
+6. self&lt;-m()@c&lt;-m3(token, z, y);
+  
+   </pre></td></tr>
+  </table> 
+The following example shows how to use named tokens.
+Lines 1-2 are equivalent to lines 3-5, and
+lines 1-2 uses a few token declarations, as follows: 
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+//lines 1-2 are equivalent to lines 3-5
+1. token x  = a&lt;-m1();
+2. x = b&lt;-m2(x);
+
+<P>
+3. token x  = a&lt;-m1();
+4. token y  = b&lt;-m2(x);
+5. x = y;
+  
+   </pre></td></tr>
+  </table> 
+The following example demonstrates how named tokens are used in loops, as follows:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+1. token x  = a&lt;-m1();
+2. for (int i = 0; i &lt; 10; i++) x = b&lt;-m2(x, i);
+  
+   </pre></td></tr>
+  </table> 
+The above example is equivalent to the following example:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+a&lt;-m1() @ 
+b&lt;-m2(token, 0) @ 
+b&lt;-m2(token, 1) @ 
+b&lt;-m2(token, 2) @ 
+b&lt;-m2(token, 3) @ 
+b&lt;-m2(token, 4) @ 
+b&lt;-m2(token, 5) @ 
+b&lt;-m2(token, 6) @ 
+b&lt;-m2(token, 7) @ 
+b&lt;-m2(token, 8) @ 
+x = b&lt;-m2(token, 9);
+  
+   </pre></td></tr>
+  </table> 
+To learn more about named tokens, we use the following example to illustrate 
+how the named token declaration works and to prevent confusion:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+1.    token x  = a&lt;-m1();
+2.
+3.    for (int j = 0; j &lt; 10; j++) {
+4.        b&lt;-m2(x);
+5.        x = c&lt;-m3(x);
+6.        d&lt;-m4(x);
+7.    }
+  
+   </pre></td></tr>
+  </table> 
+As the token is updated as soon as the code is processed, this leads to some interesting 
+occurrences. In the <TT>for</TT> loop on lines 3-7, for each iteration of the loop, the value of 
+<TT>token x</TT> in <TT>b&lt;-m2</TT> and <TT>c&lt;-m3</TT> is the same. However, 
+the value of <TT>token x</TT> in <TT>d&lt;-m4</TT> is the token returned by 
+<TT>c&lt;-m3</TT>, and thus equal to the value of <TT>token x</TT> in the message 
+sends on lines 4 and 5 in the next iteration of the loop.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html622"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html618"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html612"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html620"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html623"
+  HREF="node39.html">Join Block Continuations</A>
+<B> Up:</B> <A NAME="tex2html619"
+  HREF="node37.html">Advanced Concurrency Coordination</A>
+<B> Previous:</B> <A NAME="tex2html613"
+  HREF="node37.html">Advanced Concurrency Coordination</A>
+ &nbsp; <B>  <A NAME="tex2html621"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

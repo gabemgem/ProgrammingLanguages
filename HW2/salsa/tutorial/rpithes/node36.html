@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Running an Application</TITLE>
+<META NAME="description" CONTENT="Running an Application">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="previous" HREF="node35.html">
+<LINK REL="up" HREF="node33.html">
+<LINK REL="next" HREF="node37.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html591"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html587"
+  HREF="node33.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html583"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html589"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html592"
+  HREF="node37.html">Advanced Concurrency Coordination</A>
+<B> Up:</B> <A NAME="tex2html588"
+  HREF="node33.html">Run-time Support for WWC</A>
+<B> Previous:</B> <A NAME="tex2html584"
+  HREF="node35.html">Theaters</A>
+ &nbsp; <B>  <A NAME="tex2html590"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00533000000000000000">
+Running an Application</A>
+</H2>
+Whenever a WWC application is executed, a theater is dynamically created
+to host the bootstrapping actor of the application and a random port is assigned
+to the dynamically created theater. A dynamically created theater will be destroyed
+if no application actor is hosted at it and no incoming message will be delivered
+to the theater.
+
+<P>
+Now let us consider a WWC application example.
+Assuming a theater is running at <TT>host1:4040</TT>, and a naming 
+service at <TT>host2:5555</TT>. One can run the <TT>HelloWorld</TT> 
+example shown in Section&nbsp;<A HREF="node18.html#Writing_Your_First_SALSA_Program"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) 
+at <TT>host1:4040</TT> as follows:
+
+<P>
+<SPAN  CLASS="textbf">java  -cp salsa&lt;version&gt;.jar:. 
+ -Duan=uan://host2:5555/myhelloworld 
+ -Dual=rmsp://host1:4040/myaddr examples.HelloWorld</SPAN>
+
+
+<P>
+As one can see, the standard output of host1 displays "Hello World". One may also find that
+the application does not terminate. In fact, the reason for non-termination at the original 
+host is that the application creates a theater and the theater joins the World-Wide Computer 
+environment. Formally speaking, the application does terminate but the host to begin with 
+becomes a part of the World-Wide Computer.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Steps to Compile and Execute Your SALSA Programs</TITLE>
+<META NAME="description" CONTENT="Steps to Compile and Execute Your SALSA Programs">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="up" HREF="node18.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html372"
+  HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html368"
+  HREF="node18.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html362"
+  HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html370"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html373"
+  HREF="node20.html">HelloWorld example</A>
+<B> Up:</B> <A NAME="tex2html369"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Previous:</B> <A NAME="tex2html363"
+  HREF="node18.html">Writing Your First SALSA</A>
+ &nbsp; <B>  <A NAME="tex2html371"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00461000000000000000"></A>
+<A NAME="Steps_to_compile_and_execute_your_SALSA_program"></A>
+<BR>
+Steps to Compile and Execute Your SALSA Programs
+</H2>
+SALSA hides many of the details involved in developing distributed 
+open systems. SALSA programs are preprocessed into Java source code. 
+The generated Java code uses a library that supports all the actor's 
+primitives -- mainly creation, migration, and communication. Any Java 
+compiler can then be used to convert the generated code into Java 
+bytecode ready to be executed on any virtual machine 
+implementation (see Table&nbsp;<A HREF="#tbl1"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+
+<A NAME="tbl1"></A>        <DIV ALIGN="CENTER">
+<A NAME="277"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table:</STRONG>
+Steps to Compile and Execute Your SALSA Program.</CAPTION>
+<TR><TD ALIGN="LEFT">Step</TD>
+<TD ALIGN="LEFT">What to DO</TD>
+<TD ALIGN="LEFT">Actual Action Taken</TD>
+</TR>
+<TR><TD ALIGN="LEFT">1</TD>
+<TD ALIGN="LEFT">Create a SALSA program:</TD>
+<TD ALIGN="LEFT">Write your SALSA code</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Program.salsa</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">2</TD>
+<TD ALIGN="LEFT">Use the SALSA compiler to</TD>
+<TD ALIGN="LEFT">java salsac.SalsaCompiler</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">generate a Java source file:</TD>
+<TD ALIGN="LEFT">Program.salsa</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Program.java</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3</TD>
+<TD ALIGN="LEFT">Use a Java compiler to</TD>
+<TD ALIGN="LEFT">javac Program.java</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">generate the Java bytecode:</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Program.class</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">4</TD>
+<TD ALIGN="LEFT">Run your program using the</TD>
+<TD ALIGN="LEFT">java Program</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Java Virtual Machine</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+</DIV>
+<BR>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html372"
+  HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html368"
+  HREF="node18.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html362"
+  HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html370"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html373"
+  HREF="node20.html">HelloWorld example</A>
+<B> Up:</B> <A NAME="tex2html369"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Previous:</B> <A NAME="tex2html363"
+  HREF="node18.html">Writing Your First SALSA</A>
+ &nbsp; <B>  <A NAME="tex2html371"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Actors as Network Service</TITLE>
+<META NAME="description" CONTENT="Actors as Network Service">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="previous" HREF="node31.html">
+<LINK REL="up" HREF="node28.html">
+<LINK REL="next" HREF="node33.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html544"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html540"
+  HREF="node28.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html536"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html542"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html545"
+  HREF="node33.html">Run-time Support for WWC</A>
+<B> Up:</B> <A NAME="tex2html541"
+  HREF="node28.html">How SALSA Supports the</A>
+<B> Previous:</B> <A NAME="tex2html537"
+  HREF="node31.html">Migration</A>
+ &nbsp; <B>  <A NAME="tex2html543"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00524000000000000000"></A> <A NAME="ServiceActor"></A>
+<BR>
+Actors as Network Service
+</H2>
+There are many kinds of practical distributed applications: some are 
+designed for scientific computation, which
+may produce a lot of temporary actors for parallel processing; 
+some are developed for network services, such as a web server, a web search 
+engine, etc. Useless actors should be reclaimed for memory reuse, 
+while service-oriented actors must remain available under any circumstance.
+
+<P>
+The most important reason for reclamation of useless actors is to avoid 
+memory leakage. For example, after running the <TT>HelloWorld</TT> actor 
+(shown in Section&nbsp;<A HREF="node18.html#Writing_Your_First_SALSA_Program"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) in 
+the World-Wide Computer, the World-Wide 
+Computer must be able to reclaim this actor after it prints out "Hello World". 
+Reclamation of actors is formally named <SPAN  CLASS="textit">actor garbage collection</SPAN>.
+
+<P>
+Reclamation of useless actors introduces a new problem: how to support 
+non-collectable service-oriented actors at the language level. This is important 
+because a service-oriented actor cannot be reclaimed even if it is idle. For 
+instance, a web service should always wait for requests. Reclamation of an idle 
+service is wrong.
+
+<P>
+A service written by C or Java programming languages uses infinite loops to listen for
+requests. 
+A SALSA service should not use this approach because loops inside a message handler preclude an actor
+from executing messages in its message box. The way SALSA keeps a service actor alive is by 
+specifying it at the language level - a SALSA <SPAN  CLASS="textit">service actor</SPAN> must implement the 
+interface <TT>ActorService</TT> to 
+tell the actor garbage collector not to collect it.
+
+<P>
+The following example illustrates how a service actor is implemented 
+ in SALSA. The example implements a 
+simple address book service. The <TT>AddressBook</TT> actor provides the functionality 
+of creating new &lt;name, email&gt; entities, and 
+responding to end users' requests. The example defines the <TT>AddUser</TT> 
+message handler which adds new entries 
+in the database.  The example also defines the <TT>GetEmail</TT> message handler
+which returns an email string providing the user name.
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+module examples;
+
+<P>
+import  java.util.Hashtable;
+import  java.util.Enumeration;
+
+<P>
+behavior AddressBook implements ActorService{
+  private Hashtable name2email;
+
+<P>
+AddressBook() {
+   // Create a new hashtable to store name &amp; email
+   name2email = new Hashtable();
+  }
+
+<P>
+// Add a new user to the system, returns success
+  boolean addUser (String name, String email) {
+    // Is the user already listed
+    if (name2email.containsKey(name) || 
+        name2email.contains(email)) {
+      return false;
+    }
+    // Add to our hash table
+    name2email.put(name, email);
+    return true;
+  }
+
+<P>
+void act(String args[]) {
+    try{
+      if (args.length != 0) {
+        standardOutput&lt;-println(
+        "Usage:" +
+        "java -Duan=&lt;UAN&gt; -Dual=&lt;UAL&gt; examples.AddressBook" );
+        return;
+      }
+    } catch (Exception e) {
+      standardOutput&lt;-println("AddressBook at: ") @
+      standardOutput&lt;-println("uan: " + getUAN()) @
+      standardOutput&lt;-println("ual: " + getUAL());
+    }
+  }
+}
+  
+   </pre></td></tr>
+  </table> 
+The <TT>AddressBook</TT> actor is bound to the UAN and UAL pair specified in the command line. 
+This will result in placing the <TT>AddressBook</TT> actor in the designated 
+location and notifying the naming service.
+
+<P>
+To be able to contact the <TT>AddressBook</TT> actor, a client actor 
+first needs to get the remote reference of the service. The only 
+way to get the reference is by the message handler 
+<TT>getReferenceByName()</TT>. The example we are going to demonstrate is 
+the <TT>AddUser</TT> actor, which communicates with the <TT>AddressBook</TT> actor 
+to add new entries. Note that the <TT>AddUser</TT> actor can be started anywhere on the Internet.
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+module examples;
+
+<P>
+behavior AddUser {
+  void act(String args[]) {
+    if (args.length != 3 ) {
+      standardOutput&lt;-println( 
+      "Usage:" +
+      "java examples.AddUser &lt;targetUAN&gt; &lt;Name&gt; &lt;Email&gt;" );
+      return;
+    }
+    AddressBook book = 
+      (AddressBook)AddressBook.getReferenceByName( 
+        new UAN(args[0]) );
+    book&lt;-addUser(args[1], args[2]);
+  }
+}
+  
+   </pre></td></tr>
+  </table> 
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html544"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html540"
+  HREF="node28.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html536"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html542"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html545"
+  HREF="node33.html">Run-time Support for WWC</A>
+<B> Up:</B> <A NAME="tex2html541"
+  HREF="node28.html">How SALSA Supports the</A>
+<B> Previous:</B> <A NAME="tex2html537"
+  HREF="node31.html">Migration</A>
+ &nbsp; <B>  <A NAME="tex2html543"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

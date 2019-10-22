@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Property: waitfor</TITLE>
+<META NAME="description" CONTENT="Property: waitfor">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node44.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node40.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html684"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html680"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html674"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html682"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html685"
+  HREF="node44.html">Property: delayWaitfor</A>
+<B> Up:</B> <A NAME="tex2html681"
+  HREF="node40.html">Message Properties</A>
+<B> Previous:</B> <A NAME="tex2html675"
+  HREF="node42.html">Property: delay</A>
+ &nbsp; <B>  <A NAME="tex2html683"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00633000000000000000">
+Property: <TT>waitfor</TT></A>
+</H2>
+The <TT>waitfor</TT> property is used to wait for the reception of a token 
+before sending a message. The property can add variable continuation restrictions dynamically, 
+enabling a flexible and-barrier for concurrent execution.
+The following example shows that the message <TT>compare(b)</TT> can be delivered to Actor <TT>a</TT> if
+Actors <TT>a</TT> and <TT>b</TT> have migrated to the same theater:  
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+token email =  book&lt;-email(new String("kaoutar"));
+book&lt;-addUser(email, new String("kaoutar")):waitfor(email); 
+  
+   </pre></td></tr>
+  </table> 
+<BR><HR>
+
+</BODY>
+</HTML>

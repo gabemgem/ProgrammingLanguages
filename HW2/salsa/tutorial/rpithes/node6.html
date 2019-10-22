@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>The Actor Model</TITLE>
+<META NAME="description" CONTENT="The Actor Model">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html204"
+  HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html200"
+  HREF="node5.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html194"
+  HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html202"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html205"
+  HREF="node7.html">How SALSA Supports the</A>
+<B> Up:</B> <A NAME="tex2html201"
+  HREF="node5.html">Actor-Oriented Programming</A>
+<B> Previous:</B> <A NAME="tex2html195"
+  HREF="node5.html">Actor-Oriented Programming</A>
+ &nbsp; <B>  <A NAME="tex2html203"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00310000000000000000"></A><A NAME="The_Actor_Model"></A>
+<BR>
+The Actor Model
+</H1>
+Actors [#!agha-actors-86!#,#!hewitt-actors-77!#] provide a flexible model of concurrency for open 
+distributed systems. Actors can be used to model traditional functional, 
+procedural, or object oriented systems. Actors are independent, 
+concurrent entities that communicate by exchanging messages 
+asynchronously. Each actor encapsulates a state and a thread of 
+control that manipulates this state. In response to a message, 
+an actor may perform one of the following actions (see Figure&nbsp;<A HREF="#fig1"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>):
+
+<UL>
+<LI>Alter its current state, possibly changing its future behavior.
+</LI>
+<LI>Send messages to other actors asynchronously.
+</LI>
+<LI>Create new actors with a specified behavior.
+</LI>
+<LI>Migrate to another computing host.
+</LI>
+</UL>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig1"></A><A NAME="85"></A>
+<TABLE BORDER="5">
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure:</STRONG>
+Actors are reactive entities.  In response to a message, an
+actor can (1) change its internal state, 
+(2) send messages to peer actors, 
+(3) create new actors, 
+and/or (4) migrate to another computing host.</CAPTION>
+<TR><TD>2#2</TD></TR>
+</TABLE>
+</DIV>
+Actors receive messages not necessarily in the same order that they 
+were sent. All the received messages are initially buffered in the 
+receiving actor's message box before being processed. 
+Communication between actors is weakly fair: an actor infinitely 
+often ready to receive a message will eventually get it. An actor can 
+interact with another actor only if it has a reference to it. Actor 
+references are first class entities. They can be communicated in 
+messages to allow for arbitrary actor communication topologies. 
+Because actors can create arbitrarily new actors, the model supports
+unbounded concurrency. Furthermore, because actors only communicate
+through asynchronous message passing, in particular because there is
+no shared memory, actor systems are highly reconfigurable.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html204"
+  HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html200"
+  HREF="node5.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html194"
+  HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html202"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html205"
+  HREF="node7.html">How SALSA Supports the</A>
+<B> Up:</B> <A NAME="tex2html201"
+  HREF="node5.html">Actor-Oriented Programming</A>
+<B> Previous:</B> <A NAME="tex2html195"
+  HREF="node5.html">Actor-Oriented Programming</A>
+ &nbsp; <B>  <A NAME="tex2html203"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

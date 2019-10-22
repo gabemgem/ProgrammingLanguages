@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>HelloWorld example</TITLE>
+<META NAME="description" CONTENT="HelloWorld example">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="up" HREF="node18.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html384"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html380"
+  HREF="node18.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html374"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html382"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html385"
+  HREF="node21.html">Compiling and Running HelloWorld</A>
+<B> Up:</B> <A NAME="tex2html381"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Previous:</B> <A NAME="tex2html375"
+  HREF="node19.html">Steps to Compile and</A>
+ &nbsp; <B>  <A NAME="tex2html383"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00462000000000000000">
+<TT>HelloWorld</TT> example</A>
+</H2>
+The following piece of code is the SALSA version of <TT>HelloWorld</TT>
+program:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+1.  /* HelloWorld.salsa */
+2.  module examples;
+3.  behavior HelloWorld {
+4.    void act( String[] arguments ) {
+5.      standardOutput&lt;-print( "Hello" )@ 
+6.      standardOutput&lt;-print( "World!" );
+7.    }
+8.  }
+  
+   </pre></td></tr>
+  </table> 
+Let us go step by step through the code of the <TT>HelloWorld.salsa</TT> 
+program:
+
+<P>
+The first line is a comment. SALSA syntax is very similar to Java and you will 
+notice it uses the style of Java programming. 
+The module keyword is similar to the package keyword in Java. A <TT>module</TT> 
+is a collection of related actor behaviors. A <TT>module</TT> can group several 
+actor interfaces and behaviors.
+Line 4 starts the definition of the <TT>act</TT> message handler. 
+In fact, every 
+SALSA application must contain the  
+following signature if it does have an <TT>act</TT> message handler:
+
+<P>
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+void act( String[] arguments )
+  
+   </pre></td></tr>
+  </table> 
+When a SALSA application is executed, an actor with the specified behavior 
+is created and an <TT>act</TT> message is sent to it by the run-time environment. 
+The <TT>act</TT> message is used as a bootstrapping mechanism for SALSA programs. 
+It is analogous to the Java <TT>main</TT> method invocation.
+
+<P>
+In lines 5 and 6, two messages are sent to the <TT>standardOutput</TT> actor.
+The arrow (<TT>&lt;-</TT>) indicates message sending to an actor 
+(in this case, the <TT>standardOutput</TT> actor). To guarantee that the 
+messages are received 
+in the same order they were sent, the <TT>@</TT> sign is used to enforce  
+the second message to be sent only after the first message 
+has been processed. This is referred to as <SPAN  CLASS="textit">a token-passing continuation</SPAN>
+(see Section <A HREF="node14.html#Token_passing_continuations"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>). 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html384"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html380"
+  HREF="node18.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html374"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html382"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html385"
+  HREF="node21.html">Compiling and Running HelloWorld</A>
+<B> Up:</B> <A NAME="tex2html381"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Previous:</B> <A NAME="tex2html375"
+  HREF="node19.html">Steps to Compile and</A>
+ &nbsp; <B>  <A NAME="tex2html383"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

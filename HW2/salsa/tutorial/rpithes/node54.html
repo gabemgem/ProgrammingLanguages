@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>System Properties</TITLE>
+<META NAME="description" CONTENT="System Properties">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="previous" HREF="node53.html">
+<LINK REL="up" HREF="node52.html">
+<LINK REL="next" HREF="node55.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html818"
+  HREF="node55.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html814"
+  HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html810"
+  HREF="node53.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html816"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html819"
+  HREF="node55.html">Debugging Tips</A>
+<B> Up:</B> <A NAME="tex2html815"
+  HREF="node52.html">Name Server Options and</A>
+<B> Previous:</B> <A NAME="tex2html811"
+  HREF="node53.html">Name Server Options</A>
+ &nbsp; <B>  <A NAME="tex2html817"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00920000000000000000">
+System Properties</A>
+</H1>
+
+<P>
+SALSA programs can be executed with a set of system properties:
+	  <DL>
+<DT></DT>
+<DD>-Dport=&lt;port number&gt;: To specify the port number that the 
+                 automatically started theater will listen to. Otherwise, a random port number is used.
+		
+</DD>
+<DT></DT>
+<DD>-Didentifier=&lt;id&gt;: To specify the relative locator of the bootstrapping actor's UAL.
+		
+</DD>
+<DT></DT>
+<DD>-Duan = &lt;uan&gt;: To specify the UAN of the bootstrapping actor.
+		
+</DD>
+<DT></DT>
+<DD>-Dual= &lt;ual&gt;: To specify the UAL of the bootstrapping actor.
+		
+</DD>
+<DT></DT>
+<DD>-Dnogc: The local garbage collector will not be triggered
+		
+</DD>
+<DT></DT>
+<DD>-Dgcverbose: To show the behavior of local GC
+		
+</DD>
+<DT></DT>
+<DD>-Dnodie: Making a dynamically created theater alive
+		
+</DD>
+</DL>
+	
+    
+		Here comes the example: <DL>
+<DT></DT>
+<DD><TT>java -Dport = 5050 -Didentifier = actor/hello HelloWorld</TT>
+		
+</DD>
+</DL>
+    
+		A theater is started at the current host (e.g. <TT>europa.wcl.cs.rpi.edu</TT>).
+		The dynamically created theater listens on port <SPAN CLASS="MATH">13#13</SPAN>, and 
+		the <TT>HelloWorld</TT> actor has the UAL:  <DL>
+<DT></DT>
+<DD><TT>rmsp://europa.wcl.cs.rpi.edu:5050/actor/hello</TT>
+		
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

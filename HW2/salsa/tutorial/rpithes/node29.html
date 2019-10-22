@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Universal Actor Creation</TITLE>
+<META NAME="description" CONTENT="Universal Actor Creation">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node30.html">
+<LINK REL="previous" HREF="node28.html">
+<LINK REL="up" HREF="node28.html">
+<LINK REL="next" HREF="node30.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html510"
+  HREF="node30.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html506"
+  HREF="node28.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html500"
+  HREF="node28.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html508"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html511"
+  HREF="node30.html">Referencing actors</A>
+<B> Up:</B> <A NAME="tex2html507"
+  HREF="node28.html">How SALSA Supports the</A>
+<B> Previous:</B> <A NAME="tex2html501"
+  HREF="node28.html">How SALSA Supports the</A>
+ &nbsp; <B>  <A NAME="tex2html509"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00521000000000000000">
+Universal Actor Creation</A>
+</H2>
+A universal actor can be created at any desired theater by specifying its 
+UAN and UAL&nbsp;<A NAME="tex2html5"
+  HREF="footnode.html#foot524"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="footnote.png"></SUP></A>.
+For instance, one can create a universal actor at current 
+host as follows:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+HelloWorld helloWorld = new HelloWorld() 
+  at (new UAN("uan://nameserver/id"), null); 
+  
+   </pre></td></tr>
+  </table> 
+A universal actor can be created at a remote theater, hosted at host1:4040, 
+by the following statement:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+HelloWorld helloWorld = new HelloWorld() 
+  at (new UAN("uan://nameserver/id"), 
+      new UAL("rmsp://host1:4040/id"));
+  
+   </pre></td></tr>
+  </table> 
+An anonymous actor can be created as follows:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+HelloWorld helloWorld = new HelloWorld() 
+  at (null, null);
+  
+   </pre></td></tr>
+  </table> 
+Notice that an anonymous actor cannot migrate.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

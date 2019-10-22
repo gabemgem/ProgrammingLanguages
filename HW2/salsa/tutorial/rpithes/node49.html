@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Local Actor Garbage Collection</TITLE>
+<META NAME="description" CONTENT="Local Actor Garbage Collection">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node50.html">
+<LINK REL="previous" HREF="node48.html">
+<LINK REL="up" HREF="node47.html">
+<LINK REL="next" HREF="node50.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html760"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html756"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html750"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html758"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html761"
+  HREF="node50.html">Optional Distributed Garbage Collection</A>
+<B> Up:</B> <A NAME="tex2html757"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Previous:</B> <A NAME="tex2html751"
+  HREF="node48.html">The Live Unblocked Actor</A>
+ &nbsp; <B>  <A NAME="tex2html759"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00722000000000000000">
+Local Actor Garbage Collection</A>
+</H2>
+The difficulty of local actor garbage collection is to get a consistent 
+global state and minimize the penalty 
+of actor garbage collection. The easiest approach for actor garbage 
+collection is to stop the world: no computation is allowed during actor 
+garbage collection. There are two major drawbacks of this approach,
+the waiting time for message clearance and 
+parallelism degrading 
+(only the garbage collector is running and all actors are waiting).
+
+<P>
+A better solution for local actor garbage collection is 
+to use a snapshot-based algorithm [#!wang-varela-snapshot-tr-2006!#], which can improve parallelism 
+and does not require waiting time for message clearance.
+SALSA uses a snapshot based algorithm, together with the SALSA 
+garbage detection protocol (the pseudo-root approach) [#!wang06pr!#], 
+in order to get a meaningful global
+state. A SALSA local garbage collector
+uses the meaningful global snapshot to identify garbage actors.
+
+<P>
+One can observe the behavior of the local actor garbage collector by specifying
+the run-time environment options <SPAN  CLASS="textit">-Dgcverbose -Dnodie</SPAN> as follows:  
+
+<P>
+
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. -Dgcverbose -Dnodie examples.HelloWorld</SPAN>
+
+
+<P>
+To start a theater without running the local actor garbage collection, one can
+use the option <SPAN  CLASS="textit">-Dnogc</SPAN> as follows:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. -Dnogc examples.HelloWorld</SPAN>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html760"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html756"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html750"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html758"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html761"
+  HREF="node50.html">Optional Distributed Garbage Collection</A>
+<B> Up:</B> <A NAME="tex2html757"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Previous:</B> <A NAME="tex2html751"
+  HREF="node48.html">The Live Unblocked Actor</A>
+ &nbsp; <B>  <A NAME="tex2html759"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

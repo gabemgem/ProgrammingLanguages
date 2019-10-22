@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Input/Output (I/O) Actor Access</TITLE>
+<META NAME="description" CONTENT="Input/Output (I/O) Actor Access">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="up" HREF="node9.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html347"
+  HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html343"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html337"
+  HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html345"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html348"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Up:</B> <A NAME="tex2html344"
+  HREF="node9.html">Writing Concurrent Programs</A>
+<B> Previous:</B> <A NAME="tex2html338"
+  HREF="node16.html">First-Class Continuations</A>
+ &nbsp; <B>  <A NAME="tex2html346"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00450000000000000000">
+Input/Output (I/O) Actor Access</A>
+</H1>
+SALSA provides three kinds of I/O actors to support asynchronous I/O accesses.
+One of them is an input service (<TT>standardInput</TT>), and two are 
+output services (<TT>standardOutput</TT> and <TT>standardError</TT>).
+Since they are actors, only asynchronous accesses are possible.
+
+<P>
+<TT>standardOutput</TT> provides the following message handlers:
+
+
+<UL>
+<LI><TT>print(boolean p)</TT>
+</LI>
+<LI><TT>print(byte p)</TT>
+</LI>
+<LI><TT>print(char p)</TT>
+</LI>
+<LI><TT>print(double p)</TT>
+</LI>
+<LI><TT>print(float p)</TT>
+</LI>
+<LI><TT>print(int p)</TT>
+</LI>
+<LI><TT>print(long p)</TT>
+</LI>
+<LI><TT>print(Object p)</TT>
+</LI>
+<LI><TT>print(short p)</TT>
+</LI>
+<LI><TT>println(boolean p)</TT>
+</LI>
+<LI><TT>println(byte p)</TT>
+</LI>
+<LI><TT>println(char p)</TT>
+</LI>
+<LI><TT>println(double p)</TT>
+</LI>
+<LI><TT>println(float p)</TT>
+</LI>
+<LI><TT>println(int p)</TT>
+</LI>
+<LI><TT>println(long p)</TT>
+</LI>
+<LI><TT>println(Object p)</TT>
+</LI>
+<LI><TT>println(short p)</TT>
+</LI>
+<LI><TT>println()</TT>
+</LI>
+</UL>
+<TT>standardError</TT> provides the following message handlers:
+
+
+<UL>
+<LI><TT>print(boolean p)</TT>
+</LI>
+<LI><TT>print(byte p)</TT>
+</LI>
+<LI><TT>print(char p)</TT>
+</LI>
+<LI><TT>print(double p)</TT>
+</LI>
+<LI><TT>print(float p)</TT>
+</LI>
+<LI><TT>print(int p)</TT>
+</LI>
+<LI><TT>print(long p)</TT>
+</LI>
+<LI><TT>print(Object p)</TT>
+</LI>
+<LI><TT>print(short p)</TT>
+</LI>
+<LI><TT>println(boolean p)</TT>
+</LI>
+<LI><TT>println(byte p)</TT>
+</LI>
+<LI><TT>println(char p)</TT>
+</LI>
+<LI><TT>println(double p)</TT>
+</LI>
+<LI><TT>println(float p)</TT>
+</LI>
+<LI><TT>println(int p)</TT>
+</LI>
+<LI><TT>println(long p)</TT>
+</LI>
+<LI><TT>println(Object p)</TT>
+</LI>
+<LI><TT>println(short p)</TT>
+</LI>
+<LI><TT>println()</TT>
+</LI>
+</UL>
+<TT>standardInput</TT> provides only one message handler in current SALSA release:
+
+
+<UL>
+<LI><TT>String readLine()</TT>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

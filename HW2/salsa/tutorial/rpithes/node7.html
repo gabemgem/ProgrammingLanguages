@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>How SALSA Supports the Actor Model</TITLE>
+<META NAME="description" CONTENT="How SALSA Supports the Actor Model">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node5.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html216"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html212"
+  HREF="node5.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html206"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html214"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html217"
+  HREF="node8.html">Beyond the Actor Model</A>
+<B> Up:</B> <A NAME="tex2html213"
+  HREF="node5.html">Actor-Oriented Programming</A>
+<B> Previous:</B> <A NAME="tex2html207"
+  HREF="node6.html">The Actor Model</A>
+ &nbsp; <B>  <A NAME="tex2html215"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00320000000000000000"></A>
+<A NAME="How_SALSA_Supports_the_Actor_Model"></A>
+<BR>
+How SALSA Supports the Actor Model
+</H1>
+SALSA programmers write behaviors which include encapsulated state
+and message handlers for actor instances:
+
+<UL>
+<LI>New actors get created in SALSA by instantiating particular
+behaviors (with the <TT>new</TT> keyword). Creating an actor returns
+its reference.
+</LI>
+<LI>The message sending operator (<TT>&lt;-</TT>) is used to send
+messages to actors; messages contain a name that refers to the
+message handler for the message and optionally a list of arguments.
+</LI>
+<LI>Actors, once created, process incoming messages, one at a time. 
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

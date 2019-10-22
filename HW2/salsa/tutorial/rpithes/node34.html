@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Universal Naming Service</TITLE>
+<META NAME="description" CONTENT="Universal Naming Service">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node35.html">
+<LINK REL="previous" HREF="node33.html">
+<LINK REL="up" HREF="node33.html">
+<LINK REL="next" HREF="node35.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html569"
+  HREF="node35.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html565"
+  HREF="node33.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html559"
+  HREF="node33.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html567"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html570"
+  HREF="node35.html">Theaters</A>
+<B> Up:</B> <A NAME="tex2html566"
+  HREF="node33.html">Run-time Support for WWC</A>
+<B> Previous:</B> <A NAME="tex2html560"
+  HREF="node33.html">Run-time Support for WWC</A>
+ &nbsp; <B>  <A NAME="tex2html568"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00531000000000000000">
+Universal Naming Service</A>
+</H2>
+The UANP is a protocol that defines how to interact with the WWC naming service. 
+Similar to HTTP, UANP is text-based and defines methods that allow actors' names 
+lookup, updates, and deletions. UANP operates over TCP connections, usually the port 3030. 
+This port can be overwritten by another port number.
+
+<P>
+Every theater maintains a local registry where actors' locations are cached for faster 
+future access. One can start a naming service as follows:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. wwc.naming.WWCNamingServer</SPAN>
+
+<P>
+The above command starts a naming service on the default port 3030. You can specify another 
+port as follows:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. wwc.naming.WWCNamingServer -p 1256</SPAN>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

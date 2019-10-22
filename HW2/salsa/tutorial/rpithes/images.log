@@ -1,0 +1,118 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2019.10.20)  20 OCT 2019 14:08
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./images.tex
+(./images.tex
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 3 language(s) loaded.
+
+
+(/mnt/d/Programming Languages/ProgrammingLanguages/HW2/salsa/tutorial/thesis.cl
+s
+Document Class: thesis 1996/04/11 Rensselaer Polytechnic Institute
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+\c@firstchapter=\count88
+\numcomm=\count89
+\numcount=\count90
+) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/mnt/d/Programming Languages/ProgrammingLanguages/HW2/salsa/tutorial/caption2.
+sty
+Package: caption2 1995/10/09 v2.0 caption package (AS)
+Package: caption v2.0(BETA) <1995/10/09> (Harald Sommerfeldt)
+\realcaptionwidth=\skip43
+\captionbox=\box26
+\captionlabelsep=\dimen103
+\captionmargin=\dimen104
+\captionwidth=\dimen105
+\captionindent=\dimen106
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 99.
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen107
+\Gin@req@width=\dimen108
+) (/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks15
+\verbatim@line=\toks16
+\verbatim@in@stream=\read1
+)
+(/mnt/d/Programming Languages/ProgrammingLanguages/HW2/salsa/tutorial/listings.
+sty
+\lst@mode=\count91
+\lst@gtempboxa=\box27
+\lst@token=\toks17
+\lst@length=\count92
+\lst@currlwidth=\dimen109
+\lst@column=\count93
+\lst@pos=\count94
+\lst@lostspace=\dimen110
+\lst@width=\dimen111
+\lst@newlines=\count95
+\lst@lineno=\count96
+\c@lstlisting=\count97
+\lst@maxwidth=\dimen112
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+
+***
+*** This file requires `listings.sty' version 1.6.
+*** You have a serious problem, so I'm exiting ...
+***
+
+
+ ) ) )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 1994 (\begingroup)
+### bottom level
+(\end occurred when \ifx on line 1994 was incomplete)
+(\end occurred when \ifx on line 1994 was incomplete)
+(\end occurred when \ifx on line 1994 was incomplete)
+(\end occurred when \ifx on line 1994 was incomplete)
+(\end occurred when \ifx on line 1994 was incomplete)
+(\end occurred when \ifx on line 1994 was incomplete) 
+Here is how much of TeX's memory you used:
+ 1481 strings out of 494924
+ 19891 string characters out of 6180767
+ 70532 words of memory out of 5000000
+ 4842 multiletter control sequences out of 15000+600000
+ 3938 words of font info for 15 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 28i,1n,28p,203b,61s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+No pages of output.

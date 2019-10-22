@@ -1,0 +1,286 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=latex 2019.10.20)  20 OCT 2019 14:01
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**rpithes
+(./rpithes.tex
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 3 language(s) loaded.
+(./thesis.cls
+Document Class: thesis 1996/04/11 Rensselaer Polytechnic Institute
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+\c@firstchapter=\count88
+\numcomm=\count89
+\numcount=\count90
+) (./caption2.sty
+Package: caption2 1995/10/09 v2.0 caption package (AS)
+
+Package: caption v2.0(BETA) <1995/10/09> (Harald Sommerfeldt)
+\realcaptionwidth=\skip43
+\captionbox=\box26
+\captionlabelsep=\dimen103
+\captionmargin=\dimen104
+\captionwidth=\dimen105
+\captionindent=\dimen106
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+))
+\Gin@req@height=\dimen107
+\Gin@req@width=\dimen108
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks15
+\verbatim@line=\toks16
+\verbatim@in@stream=\read1
+) (./listings.sty
+\lst@mode=\count91
+\lst@gtempboxa=\box27
+\lst@token=\toks17
+\lst@length=\count92
+\lst@currlwidth=\dimen109
+\lst@column=\count93
+\lst@pos=\count94
+\lst@lostspace=\dimen110
+\lst@width=\dimen111
+\lst@newlines=\count95
+\lst@lineno=\count96
+\c@lstlisting=\count97
+\lst@maxwidth=\dimen112
+
+
+! Package Listings Error: Couldn't load requested aspect.
+
+See the Listings package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1994 \lst@RequireAspects\lst@loadaspects
+                                          
+? H
+The following aspects weren't loadable:
+    ,strings$,comments$,escape$,style$,language$,keywords$,labels$,lineshape$,f
+rames$,emph$,index$
+This may cause errors in the sequel.
+? 
+)
+Package: listings 2004/09/07 1.3 (Carsten Heinz)
+ (./html.sty
+Package: html 1996/12/22 v1.1 hypertext commands for latex2html (nd, hws, rrm)
+\c@lpart=\count98
+\c@lchapter=\count99
+\c@lsection=\count100
+\c@lsubsection=\count101
+\c@lsubsubsection=\count102
+\c@lparagraph=\count103
+\c@lsubparagraph=\count104
+\c@lequation=\count105
+\c@lsubsubparagraph=\count106
+\ptrfile=\write3
+)
+No file rpithes.aux.
+\openout1 = `rpithes.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+
+! Package keyval Error: language undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 }
+      
+? 
+
+! Package keyval Error: morekeywords undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 }
+      
+? 
+
+! Package keyval Error: stringstyle undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 }
+      
+? 
+
+! Package keyval Error: frame undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 }
+      
+? 
+\openout2 = `rpititle-mas.aux'.
+
+(./rpititle-mas.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 23.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 23.
+ [1
+
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
+ [2]
+No file rpithes.toc.
+\tf@toc=\write4
+\openout4 = `rpithes.toc'.
+
+) [3
+
+
+]
+\openout2 = `rpichap1.aux'.
+
+ (./rpichap1.tex
+CHAPTER 1.
+
+LaTeX Warning: Citation `varela-agha-salsa-oopsla-2001' on page 1 undefined on 
+input line 30.
+
+
+LaTeX Warning: Reference `Actor-Oriented Programming' on page 1 undefined on in
+put line 44.
+
+
+LaTeX Warning: Reference `Writing Concurrent Programs' on page 1 undefined on i
+nput line 45.
+
+
+LaTeX Warning: Reference `Writing Distributed Programs' on page 1 undefined on 
+input line 47.
+
+
+LaTeX Warning: Reference `Advanced Concurrency Coordination' on page 1 undefine
+d on input line 49.
+
+
+LaTeX Warning: Reference `actorGarbageCollection' on page 1 undefined on input 
+line 51.
+
+
+LaTeX Warning: Reference `nameserverop' on page 1 undefined on input line 53.
+
+
+LaTeX Warning: Reference `DebuggingTips' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Reference `LearningSALSAEx' on page 1 undefined on input line 55
+.
+
+
+LaTeX Warning: Reference `GRAMMAR' on page 1 undefined on input line 56.
+
+[1
+
+
+
+]) [2]
+\openout2 = `rpichap2.aux'.
+
+ (./rpichap2.tex
+CHAPTER 2.
+
+LaTeX Warning: Citation `agha-actors-86' on page 3 undefined on input line 13.
+
+
+LaTeX Warning: Citation `hewitt-actors-77' on page 3 undefined on input line 13
+.
+
+
+LaTeX Warning: Reference `fig1' on page 3 undefined on input line 19.
+
+File: fig1.eps Graphic file (type eps)
+<fig1.eps> [3
+
+
+
+] [4]
+LaTeX Font Info:    Try loading font information for OML+cmtt on input line 76.
+
+LaTeX Font Info:    No file OMLcmtt.fd. on input line 76.
+
+
+LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 76.
+
+) [5]
+\openout2 = `rpichap3.aux'.
+
+ (./rpichap3.tex
+CHAPTER 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 15.
+LaTeX 

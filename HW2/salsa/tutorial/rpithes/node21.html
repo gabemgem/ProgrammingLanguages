@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Compiling and Running HelloWorld</TITLE>
+<META NAME="description" CONTENT="Compiling and Running HelloWorld">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="up" HREF="node18.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html394"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html390"
+  HREF="node18.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html386"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html392"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html395"
+  HREF="node22.html">Writing Distributed Programs</A>
+<B> Up:</B> <A NAME="tex2html391"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Previous:</B> <A NAME="tex2html387"
+  HREF="node20.html">HelloWorld example</A>
+ &nbsp; <B>  <A NAME="tex2html393"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00463000000000000000">
+Compiling and Running <TT>HelloWorld</TT></A>
+</H2>
+
+<UL>
+<LI>Download the latest version of SALSA. You will find the 
+latest release in this URL: http://wcl.cs.rpi.edu/salsa/
+
+<P>
+</LI>
+<LI>Create a directory called <TT>examples</TT> and save the <TT>HelloWorld.salsa</TT> 
+program inside it. You can use any simple text editor or Java editor 
+to write your SALSA programs. Note that SALSA modules are similar to 
+Java packages. So you have to follow the directory structure conventions when 
+working with modules as you do when working with packages in Java.
+
+<P>
+</LI>
+<LI>Compile the SALSA source file into a Java source file using the 
+SALSA compiler. It is recommended to include the SALSA JAR file in your 
+class path. Alternatively you can use <TT>-cp</TT> to specify its path in the 
+command line. If you are using MS Windows use semi-colon (<TT>;</TT>) as a 
+class path delimiter, if you are using just about anything else, 
+use colon (<TT>:</TT>). For example:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. 
+salsac.SalsaCompiler examples/*.salsa</SPAN>
+
+<P>
+</LI>
+<LI>Use any Java compiler to compile the generated Java file. 
+Make sure to specify the SALSA class path using <TT>-classpath</TT> if 
+you have not included it already in your path.
+
+<P>
+<SPAN  CLASS="textbf">javac -classpath salsa&lt;version&gt;.jar:. examples/*.java</SPAN>
+
+<P>
+</LI>
+<LI>Execute your program
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. examples.HelloWorld</SPAN>
+
+<P>
+</LI>
+</UL>
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html394"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html390"
+  HREF="node18.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html386"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html392"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html395"
+  HREF="node22.html">Writing Distributed Programs</A>
+<B> Up:</B> <A NAME="tex2html391"
+  HREF="node18.html">Writing Your First SALSA</A>
+<B> Previous:</B> <A NAME="tex2html387"
+  HREF="node20.html">HelloWorld example</A>
+ &nbsp; <B>  <A NAME="tex2html393"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

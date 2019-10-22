@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Actor Garbage Collection</TITLE>
+<META NAME="description" CONTENT="Actor Garbage Collection">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node51.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="rpithes.html">
+<LINK REL="next" HREF="node46.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html706"
+  HREF="node46.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html702"
+  HREF="rpithes.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html696"
+  HREF="node44.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html704"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html707"
+  HREF="node46.html">Actor Garbage Definition</A>
+<B> Up:</B> <A NAME="tex2html703"
+  HREF="rpithes.html">rpithes</A>
+<B> Previous:</B> <A NAME="tex2html697"
+  HREF="node44.html">Property: delayWaitfor</A>
+ &nbsp; <B>  <A NAME="tex2html705"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00700000000000000000"></A><A NAME="actorGarbageCollection"></A>
+<BR>
+Actor Garbage Collection
+</H1>
+Actor garbage collection is the mechanism to reclaim useless
+actors. A system eventually fails because of memory leakage, 
+resulting from uncollected garbage actors. Manual actor garbage collection 
+is error-prone and always reduces 
+programmers' efficiency.
+Manual garbage collection can solve this problem if an application does not require a
+lot of dynamic memory allocation operations. As the size of the application becomes
+larger and more complex, automatic garbage collection becomes preferable. There
+are two reasons. Firstly, manual garbage collection is error-prone and thus causes
+memory security issues. Secondly, manual garbage collection cuts against high-level
+programming. From the perspective of software engineering, people should focus on
+the development of functionalities, not on irrelevant concerns. Currently, garbage
+collection usually refers to automatic garbage collection.
+
+<P>
+Many object-oriented programming languages support automatic 
+garbage collection, such as Smalltalk, Scheme, Java, etc.
+Unfortunately, these garbage collection algorithms cannot be 
+used for actor garbage collection directly, because each actor 
+has a thread of control 
+encapsulated in it. An actor can create or delete 
+references to other actors, while an object cannot. The thread of 
+control results in the essential difference of
+actor garbage collection and object garbage collection. 
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html708"
+  HREF="node46.html">Actor Garbage Definition</A>
+<LI><A NAME="tex2html709"
+  HREF="node47.html">Actor Garbage Collection in SALSA</A>
+<UL>
+<LI><A NAME="tex2html710"
+  HREF="node48.html">The Live Unblocked Actor Principle</A>
+<LI><A NAME="tex2html711"
+  HREF="node49.html">Local Actor Garbage Collection</A>
+<LI><A NAME="tex2html712"
+  HREF="node50.html">Optional Distributed Garbage Collection Service</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

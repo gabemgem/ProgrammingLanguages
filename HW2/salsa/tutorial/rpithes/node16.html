@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>First-Class Continuations</TITLE>
+<META NAME="description" CONTENT="First-Class Continuations">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html335"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html331"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html327"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html333"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html336"
+  HREF="node17.html">Input/Output (I/O) Actor Access</A>
+<B> Up:</B> <A NAME="tex2html332"
+  HREF="node13.html">Coordinating Concurrency</A>
+<B> Previous:</B> <A NAME="tex2html328"
+  HREF="node15.html">Join Blocks</A>
+ &nbsp; <B>  <A NAME="tex2html334"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00443000000000000000"></A>
+<A NAME="First-Class_Continuations"></A>
+<BR>
+First-Class Continuations
+</H2>
+The purpose of first-class continuations is to delegate 
+computation to a third party, enabling dynamic replacement or 
+expansion of messages grouped by token-passing continuations. 
+First-class continuations are very useful for writing recursive 
+code. In SALSA, the keyword <TT>currentContinuation</TT> 
+is reserved for first-class continuations. To explain the effect 
+of first-class continuations, we use two examples to show the difference. In the first example, 
+statement 1 prints out "Hello World SALSA":
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+//The first example of usning First-Class Continuation
+...
+void saySomething() {
+  standardOutput &lt;- print("Hello ") @ 
+  standardOutput &lt;- print("World ") @ 
+  currentContinuation;
+}
+....
+//statement 1 in some method.
+saySomething() @  standardOutput &lt;- print("SALSA"); 
+  
+   </pre></td></tr>
+  </table> 
+In the following (the second) example, statement 2 may generate 
+a different result from statement 1. It prints out either 
+"Hello World SALSA", or "SALSAHello World ". 
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+// The second example - without First-Class Continuation
+// statement 2 may produce a different result from 
+// that of statement 1.
+...
+void saySomething() {
+  standardOutput &lt;- print("Hello ") @ 
+  standardOutput &lt;- print("World ");
+}
+....
+//statement 2 inside some method:
+saySomething() @  standardOutput &lt;- print("SALSA") ;
+  
+   </pre></td></tr>
+  </table> 
+The keyword <TT>currentContinuation</TT> has another impact on 
+message passing -- the control of execution returns immediately 
+after processing it. Any code after it is meaningless. For 
+instance, the following piece of code always prints out "Hello World", 
+but "SALSA" never gets printed:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+// The third example - with First-Class Continuation
+// One should see "Hello World" in the standard output 
+// after statement 3 is totally executed.
+...
+void saySomething() {
+  boolean alwaysTrue=true;
+  if (alwaysTrue) {
+    standardOutput &lt;- print("Hello ") @ 
+    standardOutput &lt;- print("World ") @ 
+    currentContinuation;
+  }
+  standardOutput&lt;-println("SALSA");
+}
+....
+//statement 3 inside some method:
+saySomething() @  standardOutput &lt;- println() ;
+  
+   </pre></td></tr>
+  </table> 
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html335"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html331"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html327"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html333"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html336"
+  HREF="node17.html">Input/Output (I/O) Actor Access</A>
+<B> Up:</B> <A NAME="tex2html332"
+  HREF="node13.html">Coordinating Concurrency</A>
+<B> Previous:</B> <A NAME="tex2html328"
+  HREF="node15.html">Join Blocks</A>
+ &nbsp; <B>  <A NAME="tex2html334"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

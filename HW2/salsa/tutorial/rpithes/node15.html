@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Join Blocks</TITLE>
+<META NAME="description" CONTENT="Join Blocks">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html325"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html321"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html315"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html323"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html326"
+  HREF="node16.html">First-Class Continuations</A>
+<B> Up:</B> <A NAME="tex2html322"
+  HREF="node13.html">Coordinating Concurrency</A>
+<B> Previous:</B> <A NAME="tex2html316"
+  HREF="node14.html">Token-Passing Continuations</A>
+ &nbsp; <B>  <A NAME="tex2html324"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00442000000000000000"></A>
+<A NAME="Join_Blocks"></A>
+<BR>
+Join Blocks
+</H2>
+The previous sub-section has illustrated how token-passing 
+continuations work in message passing.  
+This sub-section introduces join blocks 
+which can specify a barrier for parallel processing activities and 
+join their results in a subsequent message. A join continuation has a scope (or block) 
+starting with "<TT>join{ </TT>" and ending with "<TT>}</TT>". 
+Every message inside the block must be executed, 
+and then the continuation message, following <TT>@</TT>, can be sent. 
+For instance, the following example prints 
+either "Hello World SALSA" or "WorldHello  SALSA":
+
+<P>
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+join {
+  standardOutput &lt;- print("Hello ");  
+  standardOutput &lt;- print("World");
+} @  standardOutput &lt;- println(" SALSA");
+  
+   </pre></td></tr>
+  </table> 
+Using the return token of the join block will be explained in 
+Chapter&nbsp;<A HREF="node37.html#Advanced_Concurrency_Coordination"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

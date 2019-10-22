@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Token-Passing Continuations</TITLE>
+<META NAME="description" CONTENT="Token-Passing Continuations">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="up" HREF="node13.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html313"
+  HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html309"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html303"
+  HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html311"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html314"
+  HREF="node15.html">Join Blocks</A>
+<B> Up:</B> <A NAME="tex2html310"
+  HREF="node13.html">Coordinating Concurrency</A>
+<B> Previous:</B> <A NAME="tex2html304"
+  HREF="node13.html">Coordinating Concurrency</A>
+ &nbsp; <B>  <A NAME="tex2html312"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00441000000000000000"></A>
+<A NAME="Token_passing_continuations"></A>
+<BR>
+Token-Passing Continuations
+</H2>
+Token-passing continuations 
+are designed to specify a partial order of message processing.
+The token '<TT>@</TT>' is used to group messages 
+and assigns the execution order to each of them. 
+For instance, the following example 
+forces the <TT>standardOutput</TT> actor, a predefined system actor for 
+output, to print out "Hello World":
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+standardOutput &lt;- print("Hello ") @ 
+standardOutput &lt;- print("World");
+  
+   </pre></td></tr>
+  </table> 
+If a programmer uses '<TT>;</TT>' instead of 
+'<TT>@</TT>', SALSA does not guarantee  
+that the standardOutput actor will print out "Hello World". It is 
+possible to have the result 
+"WorldHello ". The following example shows the 
+non-deterministic case:
+
+<P>
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+standardOutput &lt;- print("Hello ");  
+standardOutput &lt;- print("World");
+  
+   </pre></td></tr>
+  </table> 
+A SALSA message handler can return a value, and 
+the value can be accessed through a reserved keyword '<TT>token</TT>', 
+specified in one of the arguments of the next grouped message. 
+For instance, assuming there exists a user-defined 
+message handler, <TT>returnHello()</TT>, which 
+returns a string "Hello". The following example 
+prints out "Hello" to the standard output:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+// returnHello() is defined as the follows:
+//    String returnHello() {return "Hello";}
+returnHello() @  standardOutput &lt;- println(token);
+  
+   </pre></td></tr>
+  </table> 
+Again, assuming another user-defined message handler 
+<TT>combineStrings()</TT>
+accepts two input Strings and returns a combined string of the 
+inputs, the following example prints out "Hello World" 
+to the standard ouput:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+// combineStrings() is defined as follows:
+// String combineStrings(String str1, String str2) 
+//   {return str1+str2;}
+returnHello() @  
+combineStrings(token, " World") @ 
+standardOutput &lt;- println(token);
+  
+   </pre></td></tr>
+  </table> 
+Note that the first token refers to the return value of 
+<TT>returnHello()</TT>, and the second token refers to that of 
+<TT>combineStrings(token, " World")</TT>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html313"
+  HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html309"
+  HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html303"
+  HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html311"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html314"
+  HREF="node15.html">Join Blocks</A>
+<B> Up:</B> <A NAME="tex2html310"
+  HREF="node13.html">Coordinating Concurrency</A>
+<B> Previous:</B> <A NAME="tex2html304"
+  HREF="node13.html">Coordinating Concurrency</A>
+ &nbsp; <B>  <A NAME="tex2html312"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

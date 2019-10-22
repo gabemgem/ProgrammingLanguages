@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>The Live Unblocked Actor Principle</TITLE>
+<META NAME="description" CONTENT="The Live Unblocked Actor Principle">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node49.html">
+<LINK REL="previous" HREF="node47.html">
+<LINK REL="up" HREF="node47.html">
+<LINK REL="next" HREF="node49.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html748"
+  HREF="node49.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html744"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html738"
+  HREF="node47.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html746"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html749"
+  HREF="node49.html">Local Actor Garbage Collection</A>
+<B> Up:</B> <A NAME="tex2html745"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Previous:</B> <A NAME="tex2html739"
+  HREF="node47.html">Actor Garbage Collection in</A>
+ &nbsp; <B>  <A NAME="tex2html747"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00721000000000000000"></A> <A NAME="The_Live_Unblocked_Actor_Principle"></A>
+<BR>
+The Live Unblocked Actor Principle
+</H2>
+In actor-oriented programming languages, an actor must be able to access 
+resources which are encapsulated in service actors. To access a resource, an actor
+requires a reference to it. This implies that actors keep persistent references to
+some special service actors -- such as the file system service and the standard
+output service. Furthermore, an actor can explicitly create references to public
+services. For instance, an actor can dynamically convert a string into a reference to
+communicate with a service actor, analogous to accessing a web service by a web
+browser using a URL.
+
+<P>
+Without program analysis techniques,
+the ability of an actor to access resources provided by 
+an actor-oriented programming language implies 
+explicit reference creation to access service actors. The
+ability to access local service actors (e.g. the standard output) and explicit 
+reference creation to public service actors make the statement true: <SPAN  CLASS="textit">every
+actor has persistent references to root actors</SPAN>. This statement is important
+ because it changes the meaning of actor GC, making actor GC similar to passive
+object GC. It leads to the <SPAN  CLASS="textit">live unblocked actor principle</SPAN>, 
+which says every unblocked actor is live. Since
+each unblocked actor is: 1) an inverse acquaintance of the root actors and 2)
+defined as potentially live, it is live according to the definition of actor GC.
+With the live unblocked actor principle, every unblocked actor can be viewed
+as a root. Liveness of blocked actors depends on the transitive reachability from
+unblocked actors and root actors. If a blocked actor is transitively reachable
+from an unblocked actor or a root actor, it is defined as potentially live. With
+persistent root references, such potentially live, blocked actors are live because
+they are inverse acquaintances of some root actors.
+
+<P>
+Notice that the live unblocked actor principle may not be true 
+if considering resource access restrictions. This implies that
+different security models may result in different sets of actor garbage,
+given the same actor system.
+At the programming language level, SALSA assumes the live unblocked actor principle.  
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html748"
+  HREF="node49.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html744"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html738"
+  HREF="node47.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html746"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html749"
+  HREF="node49.html">Local Actor Garbage Collection</A>
+<B> Up:</B> <A NAME="tex2html745"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Previous:</B> <A NAME="tex2html739"
+  HREF="node47.html">Actor Garbage Collection in</A>
+ &nbsp; <B>  <A NAME="tex2html747"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

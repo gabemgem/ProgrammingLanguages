@@ -1,0 +1,41 @@
+module pa2;
+
+import java.util.*;
+import java.lang.Integer;
+
+behavior Node{
+	private List connections;
+	private Map data;
+	private int nodeId = 0, n = 0;
+
+	public static boolean isDebug = true;
+
+	//Pass in nodeId and n
+	Node(int id, int nNum){
+		nodeId = id;
+		n = nNum;
+
+		connections = new ArrayList();
+		data = new HashMap();
+	}
+
+	void addConnection(Node nd) {
+		if(isDebug) {
+			token connId = nd <- getNodeId() @ token str = printAddConnection(connId) @
+			standardOutput <- println(str);
+		}
+		connections.add(nd);
+	}
+
+	String printAddConnection(String connId) {
+		return "Node "+nodeId+" adding connection to node "+connId+"\n";
+	}
+
+	void printId() {
+		if(isDebug) standardOutput <- println(nodeId);
+	}
+
+	String getNodeId() {
+		return Integer.toString(nodeId);
+	}
+}

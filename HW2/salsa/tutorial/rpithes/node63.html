@@ -1,0 +1,492 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>SALSA Grammar</TITLE>
+<META NAME="description" CONTENT="SALSA Grammar">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node64.html">
+<LINK REL="previous" HREF="node62.html">
+<LINK REL="up" HREF="rpithes.html">
+<LINK REL="next" HREF="node64.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html926"
+  HREF="node64.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html922"
+  HREF="rpithes.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html916"
+  HREF="node62.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html924"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html927"
+  HREF="node64.html">About this document ...</A>
+<B> Up:</B> <A NAME="tex2html923"
+  HREF="rpithes.html">rpithes</A>
+<B> Previous:</B> <A NAME="tex2html917"
+  HREF="node62.html">History of SALSA</A>
+ &nbsp; <B>  <A NAME="tex2html925"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001400000000000000000"></A><A NAME="GRAMMAR"></A>
+<BR>
+SALSA Grammar
+</H1>
+The SALSA grammar is listed as follows:
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+CompilationUnit ::=
+  [ModuleDeclaration]
+  (ImportDeclaration)* 
+  BehaviorDeclarationAttributes
+  (BehaviorDeclaration | InterfaceDeclaration )
+  &lt;EOF&gt;
+
+<P>
+ModuleDeclaration ::= 
+  "module" Name ";"
+
+<P>
+ImportDeclaration ::= 
+  "import" &lt;IDENTIFIER&gt; ("." (&lt;IDENTIFIER&gt; | "*") )* ";"
+
+<P>
+BehaviorDeclarationAttributes ::= 
+  ("abstract" | "public" | "final")*
+
+<P>
+InterfaceDeclaration ::= 
+  "interface" &lt;IDENTIFIER&gt; ["extends" Name] InterfaceBody
+
+<P>
+Name ::= 
+  &lt;IDENTIFIER&gt; ("." &lt;IDENTIFIER&gt;)*
+
+<P>
+InterfaceBody ::= 
+  ( "{"
+    (StateVariableDeclaration | MethodLookahead ";" )*
+    "}"
+  )*
+
+<P>
+BehaviorDeclaration ::= 
+  "behavior" &lt;IDENTIFIER&gt; 
+  ["extends" Name] 
+  ["implements" Name ("," Name)*] 
+  BehaviorBody
+
+<P>
+MethodLookahead ::= 
+  MethodAttributes ( Type | "void" ) 
+  &lt;IDENTIFIER&gt; FormalParameters 
+  ["throws" Exceptions]
+
+<P>
+BehaviorBody ::= 
+  "{" 
+    ( Initializer | NestedBehaviorDeclaration | 
+      StateVariableDeclaration | MethodDeclaration | 
+      ConstructorDeclaration 
+    )* 
+  "}"
+
+<P>
+NestedBehaviorAttributes ::= 
+  ("abstract" | "public" | "final" | "protected" | 
+   "private" | "static"
+  )*
+
+<P>
+NestedBehaviorDeclaration ::= 
+  NestedBehaviorAttributes BehaviorDeclaration
+
+<P>
+Initializer ::= 
+  ["static"] Block
+
+<P>
+StateVariableAttributes ::= 
+  ("public" | "protected" | "private" | "volatile" | 
+   "static" | "final"     | "transient"
+  )*
+
+<P>
+StateVariableDeclaration ::= 
+  StateVariableAttributes 
+  Type 
+  VariableDeclaration 
+  ("," VariableDeclaration)* ";"
+
+<P>
+PrimitiveType ::= 
+  "boolean" | "char"  | "byte"   | "short" | "int" | 
+  "long"    | "float" | "double"
+
+<P>
+Type ::= 
+  (PrimitiveType | Name) ( "[" "]" )*
+
+<P>
+VariableDeclaration ::= 
+  &lt;IDENTIFIER&gt; ("[" "]")* 
+  ["=" (Expression | ArrayInitializer)]
+
+<P>
+ArrayInitializer ::= 
+  "{" 
+  [ (Expression | ArrayInitializer) 
+    ("," (Expression | ArrayInitializer) )*
+  ] 
+  "}"
+
+<P>
+AssignmentOperator ::= 
+  "="   | "*="   | "/="   | ""&#171;=" | "&#187;="  | "&#187;&gt;=" | "&amp;=" | "^=" | "|="
+
+<P>
+Expression ::= 
+  Value 
+  (
+   ((Operator | AssignmentOperator) Value) | 
+   ("?" Expression ":" Value) 
+  )*
+
+<P>
+Operator ::= 
+  "||" | "&amp;&amp;" | "|"  | "^"  | "&amp;"  | "=="  | "!="  | 
+  "&gt;"  | "&lt;"  | "&lt;=" | "&gt;=" | "&#171;" | "&#187;"  | "&#187;&gt;" | 
+  "+"  | "-"  | "*"  | "/"  | "
+<P>
+Value ::= 
+  [Prefix] Variable [Suffix] (PrimarySuffix)*
+
+<P>
+Prefix ::= 
+  "++" | "-" | "&nbsp;" | "!" | "-"
+
+<P>
+Suffix ::= 
+  "++" | "-"
+
+<P>
+Variable ::= 
+  ["(" Type ")"] 
+  (
+    Literal | Name | "this"  | "super" | 
+    AllocationExpression | "(" Expression ")"
+  )
+
+<P>
+PrimarySuffix ::= 
+  "." "this" | "." AllocationExpression |
+  "[" Expression "]" | "." &lt;IDENTIFIER&gt; | 
+  Arguments
+
+<P>
+ResultType ::= 
+  Type | "void"	
+
+<P>
+Literal ::= 
+  IntegerLiteral | FloatingPointLiteral |
+  CharacterLiteral | StringLiteral |
+  BooleanLiteral | NullLiteral |
+  TokenLiteral
+
+<P>
+Arguments ::= 
+  "(" [Expression ("," Expression)*] ")"
+
+<P>
+AllocationExpression ::= 
+  "new" PrimitiveType ArrayDimsAndInits | 
+  "new" Name 
+    (ArrayDimsAndInits | (Arguments [BehaviorBody])) 
+    [BindDeclaration]
+
+<P>
+BindDeclaration ::= 
+  "at" "(" Expression ["," Expression] ")"
+
+<P>
+ArrayDimsAndInits ::= 
+  ( "[" Expression "]")+ ("[" "]")* |
+  ("[" "]")+ ArrayInitializer
+
+<P>
+FormalParameters ::= 
+  "(" 
+    [ ["final"] Type &lt;IDENTIFIER&gt; ( "[" "]" )* 
+      ( "," ["final"] Type &lt;IDENTIFIER&gt; ( "[" "]" )* )* 
+    ] 
+  ")"
+
+<P>
+ExplicitConstructorInvocation ::= 
+  "super" Arguments ";"
+
+<P>
+ConstructorDeclaration ::= 
+  MethodAttributes &lt;IDENTIFIER&gt; FormalParameters 
+  ["throws" Exceptions] 
+  "{" 
+    [ExplicitConstructorInvocation] (Statement)* 
+  "}"
+
+<P>
+ConstructorAttributes ::= 
+  ("public" | "protected" | "private")*
+
+<P>
+MethodDeclaration ::= 
+  MethodAttributes 
+  (Type | "void") &lt;IDENTIFIER&gt; FormalParameters 
+  ["throws" Exceptions] Block
+
+<P>
+MethodAttributes ::= 
+  ("public"   | "protected" | "private" | "static" | 
+   "abstract" | "final"     | "native" 
+  )*
+
+<P>
+Exceptions ::= 
+  Name ("," Name)*
+
+<P>
+Statement ::= 
+  ContinuationStatement	| 
+  TokenDeclarationStatement | 
+  LocalVariableDeclaration ";" | 
+  Block |
+  EmptyStatement |
+  StatementExpression ";" |
+  LabeledStatement |
+  SynchronizedStatement |
+  SwitchStatement |
+  IfStatement |
+  WhileStatement |
+  DoStatement |
+  ForStatement |
+  BreakStatement |
+  ContinueStatement |
+  ReturnStatement |
+  ThrowStatement |
+  TryStatement |
+  MethodDeclaration |
+  NestedBehaviorDeclaration
+
+<P>
+Block ::= 
+  "{" ( Statement )* "}"
+
+<P>
+LocalVariableDeclaration ::= 
+  ["final"] Type 
+  VariableDeclaration ("," VariableDeclaration)*
+
+<P>
+EmptyStatement ::= 
+  ";"
+
+<P>
+StatementExpression ::= 
+  Value [AssignmentOperator Expression]
+
+<P>
+LabeledStatement ::= 
+  &lt;IDENTIFIER&gt; ":" Statement
+
+<P>
+SwitchStatement ::= 
+  "switch" "(" Expression ")" 
+  "{" (SwitchLabel (Statement)* )* "}"
+
+<P>
+SwitchLabel ::= 
+  "case" Expression ":" | "default" ":"
+
+<P>
+IfStatement ::= 
+  "if" "(" Expression ")" Statement ["else" Statement]
+
+<P>
+WhileStatement ::= 
+  "while" "(" Expression ")" Statement
+
+<P>
+DoStatement ::= 
+  "do" Statement "while" "(" Expression ")" ";"
+
+<P>
+ForInit ::= 
+  [ LocalVariableDeclaration | 
+    ( StatementExpression 
+      ("," StatementExpression)*
+    )
+  ]
+
+<P>
+ForCondition ::= 
+  [Expression]
+
+<P>
+ForIncrement ::= 
+  [ StatementExpression 
+    ("," StatementExpression)*
+  ]
+
+<P>
+ForStatement ::= 
+  "for" 
+  "(" ForInit ";" ForCondition ";" ForIncrement ")" 
+  Statement
+
+<P>
+BreakStatement ::= 
+  "break" [&lt;IDENTIFIER&gt;] ";"
+
+<P>
+ContinueStatement ::= 
+  "continue" [&lt;IDENTIFIER&gt;] ";"
+
+<P>
+ReturnStatement ::= 
+  "return" [Expression] ";"
+
+<P>
+ThrowStatement ::= 
+  "throw" Expression ";"
+
+<P>
+SynchronizedStatement ::= 
+  "synchronized" "(" Expression ")" Block
+
+<P>
+TryStatement ::= 
+  "try" Block 
+  (
+    "catch" "(" ["final"] Type &lt;IDENTIFIER&gt; ")" Block
+  )*  
+  ["finally" Block]
+
+<P>
+ContinuationStatement ::= 
+  (MessageStatement "@")*
+  (MessageStatement | "currentContinuation") ";"
+
+<P>
+MessageStatement ::= 
+[NamedTokenStatement] (MessageSend | JoinBlock)
+
+<P>
+JoinBlock ::= 
+  "join" Block
+
+<P>
+NamedTokenStatement ::= 
+  (&lt;IDENTIFIER&gt; | "token" &lt;IDENTIFIER&gt;) "="
+
+<P>
+MessageSend ::= 
+  [Value "&lt;-"] &lt;IDENTIFIER&gt; MessageArguments 
+  [":" MessageProperty]
+
+<P>
+MessageProperty ::= 
+  &lt;IDENTIFIER&gt; [Arguments]
+
+<P>
+MessageArguments ::= 
+  "(" [Expression ("," Expression)*] ")"
+
+<P>
+TokenDeclarationStatement ::= 
+  "token" &lt;IDENTIFIER&gt; "=" Expression ";"
+
+<P>
+IntegerLiteral ::= 
+  &lt;INTEGER_LITERAL&gt;
+
+<P>
+FloatingPointLiteral ::= 
+  &lt;FLOATING_POINT_LITERAL&gt;
+
+<P>
+CharacterLiteral ::= 
+  &lt;CHARACTER_LITERAL&gt;
+
+<P>
+StringLiteral ::= 
+  &lt;STRING_LITERAL&gt;
+
+<P>
+BooleanLiteral ::= 
+  "true" | "false"
+
+<P>
+NullLiteral ::= 
+  "null"
+
+<P>
+TokenLiteral ::=
+  "token"
+
+<P>
+&lt;IDENTIFIER&gt; ::= 
+  &lt;LETTER&gt; (&lt;LETTER&gt;|&lt;DIGIT&gt;)* 
+  
+   </pre></td></tr>
+  </table> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html926"
+  HREF="node64.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html922"
+  HREF="rpithes.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html916"
+  HREF="node62.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html924"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html927"
+  HREF="node64.html">About this document ...</A>
+<B> Up:</B> <A NAME="tex2html923"
+  HREF="rpithes.html">rpithes</A>
+<B> Previous:</B> <A NAME="tex2html917"
+  HREF="node62.html">History of SALSA</A>
+ &nbsp; <B>  <A NAME="tex2html925"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Property: priority</TITLE>
+<META NAME="description" CONTENT="Property: priority">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node42.html">
+<LINK REL="previous" HREF="node40.html">
+<LINK REL="up" HREF="node40.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html660"
+  HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html656"
+  HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html650"
+  HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html658"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html661"
+  HREF="node42.html">Property: delay</A>
+<B> Up:</B> <A NAME="tex2html657"
+  HREF="node40.html">Message Properties</A>
+<B> Previous:</B> <A NAME="tex2html651"
+  HREF="node40.html">Message Properties</A>
+ &nbsp; <B>  <A NAME="tex2html659"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00631000000000000000">
+Property: <TT>priority</TT></A>
+</H2>
+The <TT>priority</TT> property is used to send a message with high priority.
+This is achieved by placing the message at the beginning 
+of the actor's message box.
+For instance, the following statement will result in sending the 
+message <TT>migrate</TT> to the actor, <TT>book</TT>, with the 
+highest property. 
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+book&lt;-addUser(args[1], args[2]):priority;
+  
+   </pre></td></tr>
+  </table> 
+Let us assume that the local host is overloaded ,the message box of Actor <TT>book</TT> is full, and
+the remote host to migrate has extra computing power. 
+Using the <TT>priority</TT> property by attaching it to the <TT>migrate</TT> message may improve the performance.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

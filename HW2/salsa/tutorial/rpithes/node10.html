@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>SALSA Language Support for Actor State Modification</TITLE>
+<META NAME="description" CONTENT="SALSA Language Support for Actor State Modification">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node9.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html262"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html258"
+  HREF="node9.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html252"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html260"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html263"
+  HREF="node11.html">Actor Creation</A>
+<B> Up:</B> <A NAME="tex2html259"
+  HREF="node9.html">Writing Concurrent Programs</A>
+<B> Previous:</B> <A NAME="tex2html253"
+  HREF="node9.html">Writing Concurrent Programs</A>
+ &nbsp; <B>  <A NAME="tex2html261"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00410000000000000000"></A>
+<A NAME="SALSA_Language_Support_for_Actor_State_Modification"></A>
+<BR>
+SALSA Language Support for Actor State Modification
+</H1>
+SALSA is a dialect of Java, and it is intended to reuse as many 
+features of Java as possible. SALSA actors can contain internal state 
+in the form of Java objects or primitive types. However, it is important 
+that this internal state must be completely encapsulated, that is, not
+shared with other actors. It is also important that the internal state
+be serializable. 
+<A NAME="tex2html2"
+  HREF="footnode.html#foot119"><SUP><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="footnote.png"></SUP></A>
+<P>
+The following piece of code illustrates how
+the internal state is modified, as follows:
+
+<P>
+ 
+  <table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
+   <tr><td><pre> 
+behavior test{
+  Integer a;
+  int b;
+
+<P>
+void act(String[] args) {
+    a=new Integer(3);
+    b=a.intValue()+2;
+  }
+}
+  
+   </pre></td></tr>
+  </table> 
+<BR><HR>
+
+</BODY>
+</HTML>

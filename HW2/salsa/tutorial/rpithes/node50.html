@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Optional Distributed Garbage Collection Service</TITLE>
+<META NAME="description" CONTENT="Optional Distributed Garbage Collection Service">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="previous" HREF="node49.html">
+<LINK REL="up" HREF="node47.html">
+<LINK REL="next" HREF="node51.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html770"
+  HREF="node51.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html766"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html762"
+  HREF="node49.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html768"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html771"
+  HREF="node51.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html767"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Previous:</B> <A NAME="tex2html763"
+  HREF="node49.html">Local Actor Garbage Collection</A>
+ &nbsp; <B>  <A NAME="tex2html769"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00723000000000000000">
+Optional Distributed Garbage Collection Service</A>
+</H2>
+Distributed actor garbage collection is much more complicated because of
+the mobility of actors, the difficulty of recording a meaningful global 
+state of the distributed system, and the independent execution of the 
+distributed and local garbage collection. The SALSA garbage detection 
+protocol and the local actor garbage collectors help simplify the problem
+-- they can handle acyclic distributed garbage and all local garbage. 
+
+<P>
+The current SALSA distributed actor garbage collector is implemented as 
+a logically centralized service. It is an optional service. When it is 
+triggered to manage several hosts, it coordinates the local
+collectors to get a meaningful global snapshot. Actors referenced by those 
+outside the selected
+hosts are never collected. The task of identifying garbage is 
+done in the logically centralized service. Once garbage is identified, a garbage
+list is then sent to every participating host.
+
+<P>
+A distributed garbage collection service collects garbage for selected hosts (theaters).
+It collects distributed garbage providing a partial view of the system.
+SALSA also supports hierarchical actor garbage collection.
+To build the garbage collection hierarchy, each distributed garbage collection service
+requires its parent (at most one) and its children.  
+The usage of the distributed garbage collection service is shown as follows:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. gc.serverGC.SServerPRID 
+&lt;n&gt; &lt;parent&gt;
+&lt;child1 or host1&gt; &lt;child2 or host2&gt; ......</SPAN>
+
+<P>
+<SPAN CLASS="MATH">8#8</SPAN> specifies that the service should be activated every <SPAN CLASS="MATH">8#8</SPAN> seconds.
+<SPAN CLASS="MATH">9#9</SPAN> means that the service only executes once and then terminates.
+<TT>parent</TT> specifies the address of the parent service, with the format 
+<TT>&lt;ip&gt;:&lt;port&gt;</TT>.
+Invalid format indicates that the service is the root service.
+<TT>&lt;child1 or host1&gt;</TT> indicates
+the address of the child service or the target theater, 
+with the format <TT>&lt;ip&gt;:&lt;port&gt;</TT>.
+Notice that a theater is always a leaf.  
+
+<P>
+To run the distributed garbage collection once, 
+one can use the command as follows:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. gc.serverGC.SServerPRID -1 x
+&lt;host1&gt; &lt;host2&gt; ......</SPAN>
+
+<P>
+To run it every <SPAN CLASS="MATH">10#10</SPAN> seconds, use:
+
+<P>
+<SPAN  CLASS="textbf">java -cp salsa&lt;version&gt;.jar:. java gc.serverGC.SServerPRID  
+&lt;40&gt; x &lt;host1&gt; &lt;host2&gt; .....</SPAN>
+
+<P>
+Note that n should be large enough. The default is <SPAN CLASS="MATH">11#11</SPAN>.
+LITERATURE CITED
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html770"
+  HREF="node51.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html766"
+  HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html762"
+  HREF="node49.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html768"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html771"
+  HREF="node51.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html767"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Previous:</B> <A NAME="tex2html763"
+  HREF="node49.html">Local Actor Garbage Collection</A>
+ &nbsp; <B>  <A NAME="tex2html769"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Debugging Tips</TITLE>
+<META NAME="description" CONTENT="Debugging Tips">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node56.html">
+<LINK REL="previous" HREF="node52.html">
+<LINK REL="up" HREF="rpithes.html">
+<LINK REL="next" HREF="node56.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html830"
+  HREF="node56.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html826"
+  HREF="rpithes.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html820"
+  HREF="node54.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html828"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html831"
+  HREF="node56.html">Learning SALSA by Example</A>
+<B> Up:</B> <A NAME="tex2html827"
+  HREF="rpithes.html">rpithes</A>
+<B> Previous:</B> <A NAME="tex2html821"
+  HREF="node54.html">System Properties</A>
+ &nbsp; <B>  <A NAME="tex2html829"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001000000000000000000"></A><A NAME="DebuggingTips"></A>
+<BR>
+Debugging Tips
+</H1> 
+
+<UL>
+<LI>Make sure you really understand the actor model, its message passing semantics, and
+the concurrency coordination abstractions built in SALSA. 
+
+<P>
+</LI>
+<LI>Message passing and remote procedure
+calls are totally different. A named token variable does not have the 
+result immediately. It has the result only after the message gets 
+executed.
+
+<P>
+</LI>
+<LI>Objects in messages have pass-by-value semantics. This means that object arguments are
+cloned and then sent. A latter modification on these object arguments does not change
+the objects which were originally sent. 
+
+<P>
+</LI>
+<LI>Since the SALSA compiler does not support type checking in this version,
+you may need to go through the Java source code. The code related to your
+program is on the bottom of the generated Java source code. Do not try 
+to modify other parts irrelevant to your SALSA source code.
+
+<P>
+</LI>
+<LI>Please note that a typo in a message sending statement does not
+generate Java or SALSA compile-time errors. You have to be very careful with that.
+A run-time error will be generated instead.
+
+<P>
+</LI>
+<LI>Most people confuse <TT>self</TT> with <TT>this</TT>. <TT>this</TT> means "this actor", 
+while <TT>self</TT> "the actor reference" pointing to itself. <TT>self</TT> can only be used 
+as a target of messages, or an argument to be passed around. <TT>this</TT> can be used for 
+object method invocation. To send your references to other actors,
+use  <TT>self</TT>. Using <TT>this</TT> is wrong.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html830"
+  HREF="node56.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html826"
+  HREF="rpithes.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html820"
+  HREF="node54.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html828"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html831"
+  HREF="node56.html">Learning SALSA by Example</A>
+<B> Up:</B> <A NAME="tex2html827"
+  HREF="rpithes.html">rpithes</A>
+<B> Previous:</B> <A NAME="tex2html821"
+  HREF="node54.html">System Properties</A>
+ &nbsp; <B>  <A NAME="tex2html829"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

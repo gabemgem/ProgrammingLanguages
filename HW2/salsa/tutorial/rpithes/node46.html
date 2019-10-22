@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Actor Garbage Definition</TITLE>
+<META NAME="description" CONTENT="Actor Garbage Definition">
+<META NAME="keywords" CONTENT="rpithes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="rpithes.css">
+
+<LINK REL="next" HREF="node47.html">
+<LINK REL="previous" HREF="node45.html">
+<LINK REL="up" HREF="node45.html">
+<LINK REL="next" HREF="node47.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html723"
+  HREF="node47.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html719"
+  HREF="node45.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html713"
+  HREF="node45.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html721"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html724"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Up:</B> <A NAME="tex2html720"
+  HREF="node45.html">Actor Garbage Collection</A>
+<B> Previous:</B> <A NAME="tex2html714"
+  HREF="node45.html">Actor Garbage Collection</A>
+ &nbsp; <B>  <A NAME="tex2html722"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00710000000000000000">
+Actor Garbage Definition</A>
+</H1>
+The definition of actor garbage relates to meaningful computation. 
+Meaningful computation is 
+defined as having the ability to communicate with any of the <SPAN  CLASS="textit">root actors</SPAN>,
+that is, to access any resource or public service. The widely used 
+definition of live actors is described in [#!kafura-actorGCdef-91!#].
+Conceptually, an actor is live if it is a root or it can either potentially: 
+1) receive messages from the root actors or 2) send messages to the root 
+actors. The set of actor garbage is then defined as the complement of the set of live 
+actors. To formally describe our new actor GC model, we introduce the
+following definitions:
+
+<UL>
+<LI><B>Blocked actor</B>:
+An actor is blocked if it has no pending messages in 
+its message box, nor any message being processed. Otherwise
+it is unblocked.
+</LI>
+<LI><B>Reference</B>:
+A reference indicates an address 
+of an actor. Actor <SPAN CLASS="MATH">6#6</SPAN> can only send messages to Actor <SPAN CLASS="MATH">7#7</SPAN> if <SPAN CLASS="MATH">6#6</SPAN> 
+has a reference pointing to <SPAN CLASS="MATH">7#7</SPAN>.
+</LI>
+<LI><B>Inverse reference</B>:
+An inverse reference is a conceptual reference
+in the counter-direction of an existing reference. 
+</LI>
+<LI><B>Acquaintance</B>:
+Let Actor <SPAN CLASS="MATH">6#6</SPAN> have a reference pointing to Actor <SPAN CLASS="MATH">7#7</SPAN>.
+<SPAN CLASS="MATH">7#7</SPAN> is an acquaintance of <SPAN CLASS="MATH">6#6</SPAN>, and <SPAN CLASS="MATH">6#6</SPAN> is
+an inverse acquaintance of <SPAN CLASS="MATH">7#7</SPAN>.
+</LI>
+<LI><B>Root actor</B>:
+An actor is a root actor if it encapsulates a resource, or 
+if it is a public service -- such as I/O devices, web services, and 
+databases.
+</LI>
+</UL>
+
+<P>
+The original definition of live actors
+is denotational because it uses the concept of ``potential'' message 
+delivery and reception. To make it more operational, we use 
+the term ``<SPAN  CLASS="textit">potentially live</SPAN>'' [#!dick96!#] to define live actors.
+
+<UL>
+<LI><B>Potentially live actors</B>: 
+
+<UL>
+<LI>Every unblocked actor and root actor is potentially live. 
+</LI>
+<LI>Every acquaintance of a potentially live actor 
+  is potentially live. 
+</LI>
+</UL>
+</LI>
+<LI><B>Live actors</B>:
+
+<UL>
+<LI>A root actor is live. 
+</LI>
+<LI>Every acquaintance of a live actor is live.
+</LI>
+<LI>Every potentially live, inverse acquaintance of a live 
+  actor is live.
+</LI>
+</UL>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html723"
+  HREF="node47.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html719"
+  HREF="node45.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html713"
+  HREF="node45.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html721"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html724"
+  HREF="node47.html">Actor Garbage Collection in</A>
+<B> Up:</B> <A NAME="tex2html720"
+  HREF="node45.html">Actor Garbage Collection</A>
+<B> Previous:</B> <A NAME="tex2html714"
+  HREF="node45.html">Actor Garbage Collection</A>
+ &nbsp; <B>  <A NAME="tex2html722"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
