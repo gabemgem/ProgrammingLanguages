@@ -49,6 +49,16 @@ behavior Node{
 	}
 
 	void dealWithQuery(int qId, int nId, String key){
+		if(isDebug) {
+			standardOutput <- println("------------------\n"+
+									  "Query:\n"+
+									  "From Node: "+nodeId+
+									  "\nTo Node: "+nId+
+									  "\nQueryId: "+qId+
+									  "\nKey: "+key+
+									  "\n------------------\n");
+		}
+
 		if(nId == nodeId) {
 			if (data.containsKey(key)) {
 				mainNode <- queryResponse(qId, nodeId, data.get(key));
@@ -72,6 +82,16 @@ behavior Node{
 	}
 
 	void dealWithInsert(int nId, String k, String v) {
+		if(isDebug) {
+			standardOutput <- println("------------------\n"+
+									  "Insert:\n"+
+									  "From Node: "+nodeId+
+									  "\nTo Node: "+nId+
+									  "\nKey: "+k+
+									  "\nValue: "+v+
+									  "\n------------------\n");
+		}
+
 		if(nId == nodeId) {
 			data.put(k, v);
 			if(unresolvedQueries.containsKey(k)) {

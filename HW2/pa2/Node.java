@@ -327,7 +327,17 @@ public class Node extends UniversalActor  {
 			return nodeId;
 		}
 		public void dealWithQuery(int qId, int nId, String key) {
-			if (nId==nodeId) {{
+			if (isDebug) {{
+				{
+					// standardOutput<-println("------------------\n"+"Query:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nQueryId: "+qId+"\nKey: "+key+"\n------------------\n")
+					{
+						Object _arguments[] = { "------------------\n"+"Query:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nQueryId: "+qId+"\nKey: "+key+"\n------------------\n" };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+			}
+}			if (nId==nodeId) {{
 				if (data.containsKey(key)) {{
 					{
 						// mainNode<-queryResponse(qId, nodeId, data.get(key))
@@ -370,7 +380,17 @@ public class Node extends UniversalActor  {
 			}
 }		}
 		public void dealWithInsert(int nId, String k, String v) {
-			if (nId==nodeId) {{
+			if (isDebug) {{
+				{
+					// standardOutput<-println("------------------\n"+"Insert:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nKey: "+k+"\nValue: "+v+"\n------------------\n")
+					{
+						Object _arguments[] = { "------------------\n"+"Insert:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nKey: "+k+"\nValue: "+v+"\n------------------\n" };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+			}
+}			if (nId==nodeId) {{
 				data.put(k, v);
 				if (unresolvedQueries.containsKey(k)) {{
 					List q = (List)unresolvedQueries.get(k);
