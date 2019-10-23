@@ -5,26 +5,35 @@ import java.lang.Integer;
 
 behavior Node{
 	private List connections;
+	private List connectionIds;
 	private Map data;
+	private Map unresolvedQueries;
 	private int nodeId = 0, n = 0;
+	private Main mainNode;
+	private int max;
 
 	public static boolean isDebug = true;
 
 	//Pass in nodeId and n
-	Node(int id, int nNum){
+	Node(int id, int nNum, Main mn){
 		nodeId = id;
 		n = nNum;
+		mainNode = mn;
 
+		max = (int)Math.pow(2,n);
 		connections = new ArrayList();
+		connectionIds = new ArrayList();
 		data = new HashMap();
+		unresolvedQueries = new HashMap();
 	}
 
-	void addConnection(Node nd) {
+	void addConnection(Node nd, int ndId) {
 		if(isDebug) {
 			token connId = nd <- getNodeId() @ token str = printAddConnection(connId) @
 			standardOutput <- println(str);
 		}
 		connections.add(nd);
+		connectionIds.add(ndId);
 	}
 
 	String printAddConnection(int connId) {
@@ -38,4 +47,75 @@ behavior Node{
 	int getNodeId() {
 		return nodeId;
 	}
+
+	void dealWithQuery(int qId, int nId, String key){
+		if(nId == nodeId) {
+			if (data.containsKey(key)) {
+				mainNode <- queryResponse(qId, nodeId, data.get(key));
+			}
+			else {
+				if (!unresolvedQueries.containsKey(key)) {
+					List nUnresolvedQueryList = new ArrayList();
+					nUnresolvedQueryList.add(qId);
+					unresolvedQueries.put(key,nUnresolvedQueryList);
+				}
+				else {
+					List unresolvedQueryList = (List)unresolvedQueries.get(key);
+					unresolvedQueryList.add(qId);
+					unresolvedQueries.replace(key, unresolvedQueryList);
+				}
+			}
+		}
+		else {
+			findNextNode(nId) @ sendQuery(token, qId, nId, key);
+		}
+	}
+
+	void dealWithInsert(int nId, String k, String v) {
+		if(nId == nodeId) {
+			data.put(k, v);
+			if(unresolvedQueries.containsKey(k)) {
+				List q = (List)unresolvedQueries.get(k);
+
+				for(int i=0; i<q.size(); i++){
+					int qId = (int)q.get(i);
+					mainNode <- queryResponse(qId, nodeId, v);
+				}
+			}
+		}
+		else {
+			findNextNode(nId) @ sendInsert(token, nId, k, v);
+		}
+	}
+
+	Node findNextNode(int nId) {
+		int pDist = max, nDist = max;
+		int pNode = 0, nNode = 0;
+
+		for(int i=0; i<connectionIds.size(); i++) {
+			int cId = (int)connectionIds.get(i);
+			int dist = nId - cId;
+			if(dist>=0 && dist<pDist) {
+				pDist=dist;
+				pNode=i;
+			}
+			else if(dist<0 && dist<nDist) {
+				nDist=dist;
+				nNode=i;
+			}
+		}
+		if(pDist<max) {
+			return (Node)connections.get(pNode);
+		}
+		return (Node)connections.get(nNode);
+	}
+
+	void sendQuery(Node nd, int qId, int nId, String key) {
+		nd <- dealWithQuery(qId, nId, key);
+	}
+
+	void sendInsert(Node nd, int nId, String k, String v) {
+		nd <- dealWithInsert(nId, k, v);
+	}
+
 }

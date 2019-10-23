@@ -363,7 +363,7 @@ public class Main extends UniversalActor  {
 							}
 						}
 					}
-}					Node nd = ((Node)new Node(this).construct(i, n));
+}					Node nd = ((Node)new Node(this).construct(i, n, ((Main)self)));
 					nodes[i] = nd;
 				}
 				for (int i = 0; i<numNodes; i++){

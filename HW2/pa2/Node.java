@@ -174,8 +174,8 @@ public class Node extends UniversalActor  {
 		}
 	}
 
-	public UniversalActor construct (int id, int nNum) {
-		Object[] __arguments = { new Integer(id), new Integer(nNum) };
+	public UniversalActor construct (int id, int nNum, Main mn) {
+		Object[] __arguments = { new Integer(id), new Integer(nNum), mn };
 		this.send( new Message(this, this, "construct", __arguments, null, null) );
 		return this;
 	}
@@ -265,16 +265,24 @@ public class Node extends UniversalActor  {
 		}
 
 		List connections;
+		List connectionIds;
 		Map data;
+		Map unresolvedQueries;
 		int nodeId = 0, n = 0;
+		Main mainNode;
+		int max;
 		boolean isDebug = true;
-		void construct(int id, int nNum){
+		void construct(int id, int nNum, Main mn){
 			nodeId = id;
 			n = nNum;
+			mainNode = mn;
+			max = (int)Math.pow(2, n);
 			connections = new ArrayList();
+			connectionIds = new ArrayList();
 			data = new HashMap();
+			unresolvedQueries = new HashMap();
 		}
-		public void addConnection(Node nd) {
+		public void addConnection(Node nd, int ndId) {
 			if (isDebug) {{
 				Token connId = new Token("connId");
 				Token str = new Token("str");
@@ -300,9 +308,10 @@ public class Node extends UniversalActor  {
 				}
 			}
 }			connections.add(nd);
+			connectionIds.add(ndId);
 		}
 		public String printAddConnection(int connId) {
-			return "Node "+nodeId+" adding connection to node "+connId+"\n";
+			return "Node "+nodeId+" adding connection to node "+connId;
 		}
 		public void printId() {
 			if (isDebug) {			{
@@ -316,6 +325,125 @@ public class Node extends UniversalActor  {
 }		}
 		public int getNodeId() {
 			return nodeId;
+		}
+		public void dealWithQuery(int qId, int nId, String key) {
+			if (nId==nodeId) {{
+				if (data.containsKey(key)) {{
+					{
+						// mainNode<-queryResponse(qId, nodeId, data.get(key))
+						{
+							Object _arguments[] = { qId, nodeId, data.get(key) };
+							Message message = new Message( self, mainNode, "queryResponse", _arguments, null, null );
+							__messages.add( message );
+						}
+					}
+				}
+}				else {{
+					if (!unresolvedQueries.containsKey(key)) {{
+						List nUnresolvedQueryList = new ArrayList();
+						nUnresolvedQueryList.add(qId);
+						unresolvedQueries.put(key, nUnresolvedQueryList);
+					}
+}					else {{
+						List unresolvedQueryList = (List)unresolvedQueries.get(key);
+						unresolvedQueryList.add(qId);
+						unresolvedQueries.replace(key, unresolvedQueryList);
+					}
+}				}
+}			}
+}			else {{
+				{
+					Token token_3_0 = new Token();
+					// findNextNode(nId)
+					{
+						Object _arguments[] = { nId };
+						Message message = new Message( self, self, "findNextNode", _arguments, null, token_3_0 );
+						__messages.add( message );
+					}
+					// sendQuery(token, qId, nId, key)
+					{
+						Object _arguments[] = { token_3_0, qId, nId, key };
+						Message message = new Message( self, self, "sendQuery", _arguments, token_3_0, null );
+						__messages.add( message );
+					}
+				}
+			}
+}		}
+		public void dealWithInsert(int nId, String k, String v) {
+			if (nId==nodeId) {{
+				data.put(k, v);
+				if (unresolvedQueries.containsKey(k)) {{
+					List q = (List)unresolvedQueries.get(k);
+					for (int i = 0; i<q.size(); i++){
+						int qId = (int)q.get(i);
+						{
+							// mainNode<-queryResponse(qId, nodeId, v)
+							{
+								Object _arguments[] = { qId, nodeId, v };
+								Message message = new Message( self, mainNode, "queryResponse", _arguments, null, null );
+								__messages.add( message );
+							}
+						}
+					}
+				}
+}			}
+}			else {{
+				{
+					Token token_3_0 = new Token();
+					// findNextNode(nId)
+					{
+						Object _arguments[] = { nId };
+						Message message = new Message( self, self, "findNextNode", _arguments, null, token_3_0 );
+						__messages.add( message );
+					}
+					// sendInsert(token, nId, k, v)
+					{
+						Object _arguments[] = { token_3_0, nId, k, v };
+						Message message = new Message( self, self, "sendInsert", _arguments, token_3_0, null );
+						__messages.add( message );
+					}
+				}
+			}
+}		}
+		public Node findNextNode(int nId) {
+			int pDist = max, nDist = max;
+			int pNode = 0, nNode = 0;
+			for (int i = 0; i<connectionIds.size(); i++){
+				int cId = (int)connectionIds.get(i);
+				int dist = nId-cId;
+				if (dist>=0&&dist<pDist) {{
+					pDist = dist;
+					pNode = i;
+				}
+}				else {if (dist<0&&dist<nDist) {{
+					nDist = dist;
+					nNode = i;
+				}
+}}			}
+			if (pDist<max) {{
+				return (Node)connections.get(pNode);
+			}
+}			return (Node)connections.get(nNode);
+		}
+		public void sendQuery(Node nd, int qId, int nId, String key) {
+			{
+				// nd<-dealWithQuery(qId, nId, key)
+				{
+					Object _arguments[] = { qId, nId, key };
+					Message message = new Message( self, nd, "dealWithQuery", _arguments, null, null );
+					__messages.add( message );
+				}
+			}
+		}
+		public void sendInsert(Node nd, int nId, String k, String v) {
+			{
+				// nd<-dealWithInsert(nId, k, v)
+				{
+					Object _arguments[] = { nId, k, v };
+					Message message = new Message( self, nd, "dealWithInsert", _arguments, null, null );
+					__messages.add( message );
+				}
+			}
 		}
 	}
 }

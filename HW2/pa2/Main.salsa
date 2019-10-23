@@ -74,7 +74,7 @@ behavior Main{
         if (isDebug){
           standardOutput<-println("Creating node "+i+" locally");
         }
-        Node nd = new Node(i,n);
+        Node nd = new Node(i,n,self);
         nodes[i] = nd;
       }
       for (int i=0; i<numNodes; i++){
