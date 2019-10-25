@@ -335,6 +335,15 @@ public class Main extends UniversalActor  {
 
 			}
 }			if (theatersFile!="") {{
+				{
+					// standardOutput<-println("Valid Theaters File")
+					{
+						Object _arguments[] = { "Valid Theaters File" };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+				String[] uans = new String[numNodes];
 				for (int i = 0; i<numNodes; i++){
 					String uan_str = "uan://"+nameServer+"/id"+i;
 					String ual_str = "rmsp://"+theaters.get(i%theaters.size())+"/id"+i;
@@ -348,7 +357,32 @@ public class Main extends UniversalActor  {
 							}
 						}
 					}
-}				}
+}					Node nd = ((Node)new Node(new UAN(uan_str), new UAL(ual_str),this).construct(i, n, ((Main)self)));
+					uans[i] = uan_str;
+				}
+				for (int i = 0; i<numNodes; i++){
+					for (int j = 0; j<n; j++){
+						int connectingNodeId = ((int)(i+Math.pow(2, j)))%(int)Math.pow(2, n);
+						{
+							// standardOutput<-println("Connection from "+i+" to "+connectingNodeId)
+							{
+								Object _arguments[] = { "Connection from "+i+" to "+connectingNodeId };
+								Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+								__messages.add( message );
+							}
+						}
+						Node nd = (Node)Node.getReferenceByName(uans[i]);
+						Node nd_connect = (Node)Node.getReferenceByName(uans[connectingNodeId]);
+						{
+							// nd<-addConnection(nd_connect, connectingNodeId)
+							{
+								Object _arguments[] = { nd_connect, connectingNodeId };
+								Message message = new Message( self, nd, "addConnection", _arguments, null, null );
+								__messages.add( message );
+							}
+						}
+					}
+				}
 			}
 }			else {{
 				Node[] nodes = new Node[numNodes];
@@ -378,9 +412,9 @@ public class Main extends UniversalActor  {
 							}
 						}
 						{
-							// nodes[i]<-addConnection(nodes[connectingNodeId])
+							// nodes[i]<-addConnection(nodes[connectingNodeId], connectingNodeId)
 							{
-								Object _arguments[] = { nodes[connectingNodeId] };
+								Object _arguments[] = { nodes[connectingNodeId], connectingNodeId };
 								Message message = new Message( self, nodes[i], "addConnection", _arguments, null, null );
 								__messages.add( message );
 							}

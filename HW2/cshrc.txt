@@ -1,0 +1,9 @@
+setenv SALSAPATH /mnt/c/Users/--path-to-HW2--
+setenv SALSAVER 1.1.5
+setenv SALSAOPTS 
+
+# SALSA 1.x aliases
+alias salsac 'java -cp $SALSAPATH/salsa$SALSAVER.jar:. salsac.SalsaCompiler \!*.salsa; javac -classpath $SALSAPATH/salsa$SALSAVER.jar:. \!*.java'
+alias salsa 'java -cp $SALSAPATH/salsa$SALSAVER.jar:. $SALSAOPTS'
+alias wwcns 'java -cp $SALSAPATH/salsa$SALSAVER.jar:. wwc.naming.WWCNamingServer'
+alias wwctheater 'java -cp $SALSAPATH/salsa$SALSAVER.jar:. $SALSAOPTS wwc.messaging.Theater'

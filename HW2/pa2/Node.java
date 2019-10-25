@@ -357,7 +357,7 @@ public class Node extends UniversalActor  {
 }					else {{
 						List unresolvedQueryList = (List)unresolvedQueries.get(key);
 						unresolvedQueryList.add(qId);
-						unresolvedQueries.replace(key, unresolvedQueryList);
+						unresolvedQueries.put(key, unresolvedQueryList);
 					}
 }				}
 }			}

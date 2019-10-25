@@ -56,6 +56,8 @@ behavior Main{
     if(theatersFile != ""){
       // create actors at theaters
       // gives each theater an approximately equal number of actors
+      standardOutput<-println("Valid Theaters File");
+      String[] uans = new String[numNodes];
       for (int i=0; i<numNodes; i++){
         String uan_str = "uan://"+nameServer+"/id"+i;
         String ual_str = "rmsp://"+theaters.get(i%theaters.size())+"/id"+i;
@@ -64,7 +66,20 @@ behavior Main{
           standardOutput<-println("Creating node "+uan_str+" at "+ual_str);
         }
 
-		// TODO: Create the new node
+    // TODO: Create the new node
+    // ADDED
+        Node nd = new Node(i,n,self) at (new UAN(uan_str), new UAL(ual_str));
+        uans[i] = uan_str;
+
+      }
+      for (int i=0; i<numNodes; i++){
+        for (int j=0; j<n; j++){
+          int connectingNodeId = ((int)(i + Math.pow(2, j))) % (int)Math.pow(2,n);
+          standardOutput <- println("Connection from "+i+" to "+connectingNodeId);
+          Node nd = (Node) Node.getReferenceByName(uans[i]);
+          Node nd_connect = (Node) Node.getReferenceByName(uans[connectingNodeId]);
+          nd <- addConnection(nd_connect, connectingNodeId);
+        }
       }
     }
     else{
@@ -81,7 +96,7 @@ behavior Main{
         for (int j=0; j<n; j++){
           int connectingNodeId = ((int)(i + Math.pow(2, j))) % (int)Math.pow(2,n);
           standardOutput <- println("Connection from "+i+" to "+connectingNodeId);
-          nodes[i] <- addConnection(nodes[connectingNodeId]);
+          nodes[i] <- addConnection(nodes[connectingNodeId], connectingNodeId);
         }
       }
     }
