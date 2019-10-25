@@ -82,6 +82,7 @@ behavior Node{
 	}
 
 	void dealWithInsert(int nId, String k, String v) {
+		standardOutput <- println("heck");
 		if(isDebug) {
 			standardOutput <- println("------------------\n"+
 									  "Insert:\n"+

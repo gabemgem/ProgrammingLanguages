@@ -270,6 +270,8 @@ public class Main extends UniversalActor  {
 		String theatersFile = "";
 		String nameServer = "127.0.0.1:3030";
 		boolean isDebug = true;
+		Vector nodes = new Vector();
+		int numNodes;
 		public void act(String args[]) {
 			int argc = args.length;
 			if (argc>=1) {theatersFile = args[0];
@@ -310,10 +312,18 @@ public class Main extends UniversalActor  {
 		}
 		public void createDHT(String n_string) {
 			int n = Integer.parseInt(n_string);
-			int numNodes = (int)Math.pow(2, n);
+			numNodes = (int)Math.pow(2, n);
 			Vector theaters = new Vector();
 			String theater;
 			if (theatersFile!="") {{
+				{
+					// standardOutput<-println("Valid Theaters File")
+					{
+						Object _arguments[] = { "Valid Theaters File" };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
 				try {
 					BufferedReader in = new BufferedReader(new FileReader(theatersFile));
 					while ((theater=in.readLine())!=null) {
@@ -358,6 +368,7 @@ public class Main extends UniversalActor  {
 						}
 					}
 }					Node nd = ((Node)new Node(new UAN(uan_str), new UAL(ual_str),this).construct(i, n, ((Main)self)));
+					nodes.add(nd);
 					uans[i] = uan_str;
 				}
 				for (int i = 0; i<numNodes; i++){
@@ -371,8 +382,8 @@ public class Main extends UniversalActor  {
 								__messages.add( message );
 							}
 						}
-						Node nd = (Node)Node.getReferenceByName(uans[i]);
-						Node nd_connect = (Node)Node.getReferenceByName(uans[connectingNodeId]);
+						Node nd = (Node)nodes.get(i);
+						Node nd_connect = (Node)nodes.get(connectingNodeId);
 						{
 							// nd<-addConnection(nd_connect, connectingNodeId)
 							{
@@ -385,7 +396,6 @@ public class Main extends UniversalActor  {
 				}
 			}
 }			else {{
-				Node[] nodes = new Node[numNodes];
 				for (int i = 0; i<numNodes; i++){
 					if (isDebug) {{
 						{
@@ -398,7 +408,7 @@ public class Main extends UniversalActor  {
 						}
 					}
 }					Node nd = ((Node)new Node(this).construct(i, n, ((Main)self)));
-					nodes[i] = nd;
+					nodes.add(nd);
 				}
 				for (int i = 0; i<numNodes; i++){
 					for (int j = 0; j<n; j++){
@@ -412,10 +422,10 @@ public class Main extends UniversalActor  {
 							}
 						}
 						{
-							// nodes[i]<-addConnection(nodes[connectingNodeId], connectingNodeId)
+							// (Node)nodes.get(i)<-addConnection((Node)nodes.get(connectingNodeId), connectingNodeId)
 							{
-								Object _arguments[] = { nodes[connectingNodeId], connectingNodeId };
-								Message message = new Message( self, nodes[i], "addConnection", _arguments, null, null );
+								Object _arguments[] = { (Node)nodes.get(connectingNodeId), connectingNodeId };
+								Message message = new Message( self, (Node)nodes.get(i), "addConnection", _arguments, null, null );
 								__messages.add( message );
 							}
 						}
@@ -464,6 +474,23 @@ break;				}
 }				int fromNode = Integer.parseInt(tokens[1]);
 				String key = tokens[2];
 				String value = tokens[3];
+				{
+					// standardOutput<-println("heck")
+					{
+						Object _arguments[] = { "heck" };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+				Node nd = (Node)nodes.get(fromNode);
+				{
+					// nd<-dealWithInsert(Hash(key, numNodes), key, value)
+					{
+						Object _arguments[] = { Hash(key, numNodes), key, value };
+						Message message = new Message( self, nd, "dealWithInsert", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
 break;			}
 			case "query": {
 				if (tokens.length<4) {{
@@ -479,6 +506,23 @@ break;				}
 }				int queryID = Integer.parseInt(tokens[1]);
 				int fromNode = Integer.parseInt(tokens[2]);
 				String key = tokens[3];
+				{
+					// standardOutput<-println("heck")
+					{
+						Object _arguments[] = { "heck" };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+				Node nd = (Node)nodes.get(fromNode);
+				{
+					// nd<-dealWithQuery(queryID, Hash(key, numNodes), key)
+					{
+						Object _arguments[] = { queryID, Hash(key, numNodes), key };
+						Message message = new Message( self, nd, "dealWithQuery", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
 break;			}
 			default: 			{
 				// standardError<-println("[error] Command \""+tokens[0]+"\" not recognized.")

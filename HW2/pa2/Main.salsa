@@ -14,7 +14,8 @@ behavior Main{
                                                 // List of ip addr:port separated by newlines
   String nameServer = "127.0.0.1:3030";         // Default name server (2nd cmd line argument))
   public static boolean isDebug = true;       // Additional output for debugging (set to false when testing autograding)
-
+  Vector nodes = new Vector();
+  int numNodes;
   void act(String args[]){
     int argc = args.length;
     if(argc>=1) theatersFile=args[0];
@@ -35,12 +36,13 @@ behavior Main{
     
     int n = Integer.parseInt(n_string);
     
-    int numNodes = (int) Math.pow(2,n);
+    numNodes = (int) Math.pow(2,n);
 
     // read available theaters
     Vector theaters = new Vector();
     String theater;
     if(theatersFile != ""){
+      standardOutput<-println("Valid Theaters File");
       try {
         BufferedReader in = new BufferedReader(new FileReader(theatersFile));
         while ((theater = in.readLine())!= null){
@@ -58,6 +60,7 @@ behavior Main{
       // gives each theater an approximately equal number of actors
       standardOutput<-println("Valid Theaters File");
       String[] uans = new String[numNodes];
+      //Node[] nodes = new Node[numNodes];
       for (int i=0; i<numNodes; i++){
         String uan_str = "uan://"+nameServer+"/id"+i;
         String ual_str = "rmsp://"+theaters.get(i%theaters.size())+"/id"+i;
@@ -69,6 +72,7 @@ behavior Main{
     // TODO: Create the new node
     // ADDED
         Node nd = new Node(i,n,self) at (new UAN(uan_str), new UAL(ual_str));
+        nodes.add(nd);
         uans[i] = uan_str;
 
       }
@@ -76,27 +80,29 @@ behavior Main{
         for (int j=0; j<n; j++){
           int connectingNodeId = ((int)(i + Math.pow(2, j))) % (int)Math.pow(2,n);
           standardOutput <- println("Connection from "+i+" to "+connectingNodeId);
-          Node nd = (Node) Node.getReferenceByName(uans[i]);
-          Node nd_connect = (Node) Node.getReferenceByName(uans[connectingNodeId]);
+          //Node nd = (Node) Node.getReferenceByName(uans[i]);
+          //Node nd_connect = (Node) Node.getReferenceByName(uans[connectingNodeId]);
+          Node nd = (Node) nodes.get(i);
+          Node nd_connect = (Node) nodes.get(connectingNodeId);
           nd <- addConnection(nd_connect, connectingNodeId);
         }
       }
     }
     else{
-      Node[] nodes = new Node[numNodes];
+      //Node[] nodes = new Node[numNodes];
       //If no theaters file, create actors locally
       for (int i=0; i<numNodes; i++){        
         if (isDebug){
           standardOutput<-println("Creating node "+i+" locally");
         }
         Node nd = new Node(i,n,self);
-        nodes[i] = nd;
+        nodes.add(nd);
       }
       for (int i=0; i<numNodes; i++){
         for (int j=0; j<n; j++){
           int connectingNodeId = ((int)(i + Math.pow(2, j))) % (int)Math.pow(2,n);
           standardOutput <- println("Connection from "+i+" to "+connectingNodeId);
-          nodes[i] <- addConnection(nodes[connectingNodeId], connectingNodeId);
+          (Node) nodes.get(i) <- addConnection((Node) nodes.get(connectingNodeId), connectingNodeId);
         }
       }
     }
@@ -123,7 +129,10 @@ behavior Main{
         int fromNode = Integer.parseInt(tokens[1]);
         String key = tokens[2];
         String value = tokens[3];
-		// TODO: Do something with the parsed insert
+    // TODO: Do something with the parsed insert
+        standardOutput <- println("heck");
+        Node nd = (Node) nodes.get(fromNode);
+        nd <- dealWithInsert(Hash(key, numNodes), key, value);
         break;
       }
       case "query":{
@@ -134,7 +143,10 @@ behavior Main{
         int queryID = Integer.parseInt(tokens[1]);
         int fromNode = Integer.parseInt(tokens[2]);
         String key = tokens[3];
-		// TODO: Do something with the parsed query
+    // TODO: Do something with the parsed query
+        standardOutput <- println("heck");
+        Node nd = (Node) nodes.get(fromNode);
+        nd <- dealWithQuery(queryID, Hash(key, numNodes), key);
         break;
       }
       default:

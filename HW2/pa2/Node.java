@@ -380,6 +380,14 @@ public class Node extends UniversalActor  {
 			}
 }		}
 		public void dealWithInsert(int nId, String k, String v) {
+			{
+				// standardOutput<-println("heck")
+				{
+					Object _arguments[] = { "heck" };
+					Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+					__messages.add( message );
+				}
+			}
 			if (isDebug) {{
 				{
 					// standardOutput<-println("------------------\n"+"Insert:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nKey: "+k+"\nValue: "+v+"\n------------------\n")
