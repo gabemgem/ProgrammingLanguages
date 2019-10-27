@@ -12,7 +12,7 @@ import java.lang.Math;
 behavior Main{
   String theatersFile = "";//"theatersFile.txt";// Default location for list of theaters (1st cmd line argument)
                                                 // List of ip addr:port separated by newlines
-  String nameServer = "127.0.0.1:3030";         // Default name server (2nd cmd line argument))
+  String nameServer = "127.0.1.1:3030";         // Default name server (2nd cmd line argument))
   public static boolean isDebug = true;       // Additional output for debugging (set to false when testing autograding)
   Vector nodes = new Vector();
   int numNodes;

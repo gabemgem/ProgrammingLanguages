@@ -1,0 +1,26 @@
+#Copy from here
+java -cp salsa1.1.5.jar:. wwc.naming.WWCNamingServer -p 3030 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4040 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4041 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4042 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4043 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4044 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4045 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4046 &
+java -cp salsa1.1.5.jar:. wwc.messaging.Theater 4047 &
+
+#to here
+
+
+#Copy from here
+kill %9
+kill %8
+kill %7
+kill %6
+kill %5
+kill %4
+kill %3
+kill %2
+kill %1
+
+#to here
