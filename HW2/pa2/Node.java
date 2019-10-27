@@ -326,7 +326,7 @@ public class Node extends UniversalActor  {
 		public int getNodeId() {
 			return nodeId;
 		}
-		public void dealWithQuery(int qId, int nId, String key) {
+		public void dealWithQuery(int qId, int nId, String key, int startingId) {
 			if (isDebug) {{
 				{
 					// standardOutput<-println("------------------\n"+"Query:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nQueryId: "+qId+"\nKey: "+key+"\n------------------\n")
@@ -340,23 +340,26 @@ public class Node extends UniversalActor  {
 }			if (nId==nodeId) {{
 				if (data.containsKey(key)) {{
 					{
-						// mainNode<-queryResponse(qId, nodeId, data.get(key))
+						// mainNode<-queryResponse(qId, startingId, key, nodeId, data.get(key))
 						{
-							Object _arguments[] = { qId, nodeId, data.get(key) };
+							Object _arguments[] = { qId, startingId, key, nodeId, data.get(key) };
 							Message message = new Message( self, mainNode, "queryResponse", _arguments, null, null );
 							__messages.add( message );
 						}
 					}
 				}
 }				else {{
+					int[] ids = new int[2];
+					ids[0] = qId;
+					ids[1] = startingId;
 					if (!unresolvedQueries.containsKey(key)) {{
 						List nUnresolvedQueryList = new ArrayList();
-						nUnresolvedQueryList.add(qId);
+						nUnresolvedQueryList.add(ids);
 						unresolvedQueries.put(key, nUnresolvedQueryList);
 					}
 }					else {{
 						List unresolvedQueryList = (List)unresolvedQueries.get(key);
-						unresolvedQueryList.add(qId);
+						unresolvedQueryList.add(ids);
 						unresolvedQueries.put(key, unresolvedQueryList);
 					}
 }				}
@@ -370,9 +373,9 @@ public class Node extends UniversalActor  {
 						Message message = new Message( self, self, "findNextNode", _arguments, null, token_3_0 );
 						__messages.add( message );
 					}
-					// sendQuery(token, qId, nId, key)
+					// sendQuery(token, qId, nId, key, startingId)
 					{
-						Object _arguments[] = { token_3_0, qId, nId, key };
+						Object _arguments[] = { token_3_0, qId, nId, key, startingId };
 						Message message = new Message( self, self, "sendQuery", _arguments, token_3_0, null );
 						__messages.add( message );
 					}
@@ -380,14 +383,6 @@ public class Node extends UniversalActor  {
 			}
 }		}
 		public void dealWithInsert(int nId, String k, String v) {
-			{
-				// standardOutput<-println("heck")
-				{
-					Object _arguments[] = { "heck" };
-					Message message = new Message( self, standardOutput, "println", _arguments, null, null );
-					__messages.add( message );
-				}
-			}
 			if (isDebug) {{
 				{
 					// standardOutput<-println("------------------\n"+"Insert:\n"+"From Node: "+nodeId+"\nTo Node: "+nId+"\nKey: "+k+"\nValue: "+v+"\n------------------\n")
@@ -403,11 +398,11 @@ public class Node extends UniversalActor  {
 				if (unresolvedQueries.containsKey(k)) {{
 					List q = (List)unresolvedQueries.get(k);
 					for (int i = 0; i<q.size(); i++){
-						int qId = (int)q.get(i);
+						int[] ids = (int[])q.get(i);
 						{
-							// mainNode<-queryResponse(qId, nodeId, v)
+							// mainNode<-queryResponse(ids[0], ids[1], k, nodeId, v)
 							{
-								Object _arguments[] = { qId, nodeId, v };
+								Object _arguments[] = { ids[0], ids[1], k, nodeId, v };
 								Message message = new Message( self, mainNode, "queryResponse", _arguments, null, null );
 								__messages.add( message );
 							}
@@ -453,11 +448,11 @@ public class Node extends UniversalActor  {
 			}
 }			return (Node)connections.get(nNode);
 		}
-		public void sendQuery(Node nd, int qId, int nId, String key) {
+		public void sendQuery(Node nd, int qId, int nId, String key, int startingId) {
 			{
-				// nd<-dealWithQuery(qId, nId, key)
+				// nd<-dealWithQuery(qId, nId, key, startingId)
 				{
-					Object _arguments[] = { qId, nId, key };
+					Object _arguments[] = { qId, nId, key, startingId };
 					Message message = new Message( self, nd, "dealWithQuery", _arguments, null, null );
 					__messages.add( message );
 				}

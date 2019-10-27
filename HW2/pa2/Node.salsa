@@ -48,7 +48,7 @@ behavior Node{
 		return nodeId;
 	}
 
-	void dealWithQuery(int qId, int nId, String key){
+	void dealWithQuery(int qId, int nId, String key, int startingId){
 		if(isDebug) {
 			standardOutput <- println("------------------\n"+
 									  "Query:\n"+
@@ -61,28 +61,31 @@ behavior Node{
 
 		if(nId == nodeId) {
 			if (data.containsKey(key)) {
-				mainNode <- queryResponse(qId, nodeId, data.get(key));
+				mainNode <- queryResponse(qId, startingId, key, nodeId, data.get(key));
 			}
 			else {
+				int[] ids = new int[2];
+				ids[0] = qId;
+				ids[1] = startingId;
 				if (!unresolvedQueries.containsKey(key)) {
 					List nUnresolvedQueryList = new ArrayList();
-					nUnresolvedQueryList.add(qId);
+					nUnresolvedQueryList.add(ids);
 					unresolvedQueries.put(key,nUnresolvedQueryList);
 				}
 				else {
 					List unresolvedQueryList = (List)unresolvedQueries.get(key);
-					unresolvedQueryList.add(qId);
+					unresolvedQueryList.add(ids);
 					unresolvedQueries.put(key, unresolvedQueryList);
 				}
 			}
 		}
 		else {
-			findNextNode(nId) @ sendQuery(token, qId, nId, key);
+			findNextNode(nId) @ sendQuery(token, qId, nId, key, startingId);
 		}
 	}
 
 	void dealWithInsert(int nId, String k, String v) {
-		standardOutput <- println("heck");
+		//standardOutput <- println("heck");
 		if(isDebug) {
 			standardOutput <- println("------------------\n"+
 									  "Insert:\n"+
@@ -99,8 +102,8 @@ behavior Node{
 				List q = (List)unresolvedQueries.get(k);
 
 				for(int i=0; i<q.size(); i++){
-					int qId = (int)q.get(i);
-					mainNode <- queryResponse(qId, nodeId, v);
+					int[] ids = (int[])q.get(i);
+					mainNode <- queryResponse(ids[0], ids[1], k, nodeId, v);
 				}
 			}
 		}
@@ -131,8 +134,8 @@ behavior Node{
 		return (Node)connections.get(nNode);
 	}
 
-	void sendQuery(Node nd, int qId, int nId, String key) {
-		nd <- dealWithQuery(qId, nId, key);
+	void sendQuery(Node nd, int qId, int nId, String key, int startingId) {
+		nd <- dealWithQuery(qId, nId, key, startingId);
 	}
 
 	void sendInsert(Node nd, int nId, String k, String v) {

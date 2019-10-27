@@ -130,7 +130,10 @@ behavior Main{
         String key = tokens[2];
         String value = tokens[3];
     // TODO: Do something with the parsed insert
-        standardOutput <- println("heck");
+        if (isDebug) {
+          token h = Hash(key,numNodes) @ 
+            printHashNode(h, true);
+        }
         Node nd = (Node) nodes.get(fromNode);
         nd <- dealWithInsert(Hash(key, numNodes), key, value);
         break;
@@ -144,9 +147,12 @@ behavior Main{
         int fromNode = Integer.parseInt(tokens[2]);
         String key = tokens[3];
     // TODO: Do something with the parsed query
-        standardOutput <- println("heck");
+        if (isDebug) {
+          token h = Hash(key,numNodes) @ 
+            printHashNode(h, false);
+        }
         Node nd = (Node) nodes.get(fromNode);
-        nd <- dealWithQuery(queryID, Hash(key, numNodes), key);
+        nd <- dealWithQuery(queryID, Hash(key, numNodes), key, fromNode);
         break;
       }
       default:
@@ -158,6 +164,20 @@ behavior Main{
   //Used if a node wants to print to STDOUT on the I/O theater
   void println(String str){
     standardOutput<-println(str);
+  }
+
+  void printHashNode(int h, boolean isInsert) {
+    if(isInsert) {
+      standardOutput <- println("Hashed node for insert: " + h);
+    }
+    else {
+      standardOutput <- println("Hashed node for query: " + h);
+    }
+  }
+
+  void queryResponse(int qID, int startingID, String k, int nodeID, String v) {
+    standardOutput <- println("Request "+qID+" sent to agent "+startingID+
+      ": Value for key \""+k+"\" stored in node "+nodeID+": \""+v+"\"");
   }
 
   // Given a key, returns what node that key should be stored in

@@ -474,15 +474,24 @@ break;				}
 }				int fromNode = Integer.parseInt(tokens[1]);
 				String key = tokens[2];
 				String value = tokens[3];
-				{
-					// standardOutput<-println("heck")
+				if (isDebug) {{
+					Token h = new Token("h");
 					{
-						Object _arguments[] = { "heck" };
-						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
-						__messages.add( message );
+						// token h = Hash(key, numNodes)
+						{
+							Object _arguments[] = { key, numNodes };
+							Message message = new Message( self, self, "Hash", _arguments, null, h );
+							__messages.add( message );
+						}
+						// printHashNode(h, true)
+						{
+							Object _arguments[] = { h, true };
+							Message message = new Message( self, self, "printHashNode", _arguments, h, null );
+							__messages.add( message );
+						}
 					}
 				}
-				Node nd = (Node)nodes.get(fromNode);
+}				Node nd = (Node)nodes.get(fromNode);
 				{
 					// nd<-dealWithInsert(Hash(key, numNodes), key, value)
 					{
@@ -506,19 +515,28 @@ break;				}
 }				int queryID = Integer.parseInt(tokens[1]);
 				int fromNode = Integer.parseInt(tokens[2]);
 				String key = tokens[3];
-				{
-					// standardOutput<-println("heck")
+				if (isDebug) {{
+					Token h = new Token("h");
 					{
-						Object _arguments[] = { "heck" };
-						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
-						__messages.add( message );
+						// token h = Hash(key, numNodes)
+						{
+							Object _arguments[] = { key, numNodes };
+							Message message = new Message( self, self, "Hash", _arguments, null, h );
+							__messages.add( message );
+						}
+						// printHashNode(h, false)
+						{
+							Object _arguments[] = { h, false };
+							Message message = new Message( self, self, "printHashNode", _arguments, h, null );
+							__messages.add( message );
+						}
 					}
 				}
-				Node nd = (Node)nodes.get(fromNode);
+}				Node nd = (Node)nodes.get(fromNode);
 				{
-					// nd<-dealWithQuery(queryID, Hash(key, numNodes), key)
+					// nd<-dealWithQuery(queryID, Hash(key, numNodes), key, fromNode)
 					{
-						Object _arguments[] = { queryID, Hash(key, numNodes), key };
+						Object _arguments[] = { queryID, Hash(key, numNodes), key, fromNode };
 						Message message = new Message( self, nd, "dealWithQuery", _arguments, null, null );
 						__messages.add( message );
 					}
@@ -539,6 +557,38 @@ break;			}
 				// standardOutput<-println(str)
 				{
 					Object _arguments[] = { str };
+					Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+					__messages.add( message );
+				}
+			}
+		}
+		public void printHashNode(int h, boolean isInsert) {
+			if (isInsert) {{
+				{
+					// standardOutput<-println("Hashed node for insert: "+h)
+					{
+						Object _arguments[] = { "Hashed node for insert: "+h };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+			}
+}			else {{
+				{
+					// standardOutput<-println("Hashed node for query: "+h)
+					{
+						Object _arguments[] = { "Hashed node for query: "+h };
+						Message message = new Message( self, standardOutput, "println", _arguments, null, null );
+						__messages.add( message );
+					}
+				}
+			}
+}		}
+		public void queryResponse(int qID, int startingID, String k, int nodeID, String v) {
+			{
+				// standardOutput<-println("Request "+qID+" sent to agent "+startingID+": Value for key \""+k+"\" stored in node "+nodeID+": \""+v+"\"")
+				{
+					Object _arguments[] = { "Request "+qID+" sent to agent "+startingID+": Value for key \""+k+"\" stored in node "+nodeID+": \""+v+"\"" };
 					Message message = new Message( self, standardOutput, "println", _arguments, null, null );
 					__messages.add( message );
 				}
