@@ -268,7 +268,7 @@ public class Main extends UniversalActor  {
 		}
 
 		String theatersFile = "";
-		String nameServer = "127.0.0.1:3030";
+		String nameServer = "127.0.1.1:3030";
 		boolean isDebug = true;
 		Vector nodes = new Vector();
 		int numNodes;
