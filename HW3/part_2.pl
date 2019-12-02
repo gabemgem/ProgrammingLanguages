@@ -2,7 +2,9 @@
 %% Programming Languages Fall 2019 PA3
 %% Written in ProLog
 
+
 main :- 
+set_prolog_flag(prompt_alternatives_on,groundness),
 read_line_to_codes(user_input,Cs), atom_codes(A, Cs), atomic_list_concat(L, ' ', A),
 parseFind(L).
 
@@ -69,47 +71,46 @@ atom_number(Head, X),
 (Tail = [])->make_set(Evens, Odds, [], 'multiply', X); invalid.
 
 
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% I think the stuff below this is decent
-
+%% Checks that every element in a list is unique
 unique([]).
 unique([X|Y]) :- \+ memberchk(X,Y), unique(Y).
 
+%% Binds all even numbers between 0 and 128 to N
 evennum(N) :- 
 between(0,128,N),
 0 is N mod 2.
 
+%% Binds all odd numbers between 0 and 128 to N
 oddnum(N) :-
 between(0,128,N),
 1 is N mod 2.
 
-correctAmounts([],E,O) :-
-0 is E,
-0 is O.
-
-correctAmounts([X|Y],E,O) :-
-evennum(X),
-E2 is E - 1,
-correctAmounts(Y,E2,O).
-
-correctAmounts([X|Y],E,O) :-
-oddnum(X),
-O2 is O - 1,
-correctAmounts(Y,E,O2).
-
+%% Unnecessary rename of a builtin function to add elements of a list
 add_list(X,Sum) :- sum_list(X,Sum).
 
+%% Multiplies together all elements of a list
 product_list([],1).
 product_list([X|Y],Product) :-
 between(0,128,X),
 product_list(Y,P2),
 Product is X * P2.
+
+%% Prints out a list in the method specified by the homework
+output_list([]).
+
+output_list([H|[]]) :-
+write(H).
+
+output_list([H|T]) :-
+write(H),
+write(','),
+output_list(T).
+
+
+%% make_set is the main function that finds an interesting set from the
+%% parse data
+%% params: num even numbers, num odd numbers, input set, 
+%% method ('sum'/'multiply'), goal number
 
 make_set(0,0,S,M,G) :- 
 M = 'multiply',
@@ -134,7 +135,6 @@ unique(S2),
 Odds2 is Odds - 1,
 make_set(0,Odds2,S2,M,G).
 
-%% params: num even numbers, num odd numbers, input set, method ('sum'/'multiply'), goal number
 make_set(Evens,Odds,S,M,G) :-
 Evens > 0,
 evennum(N),
@@ -142,13 +142,3 @@ evennum(N),
 unique(S2),
 Evens2 is Evens - 1,
 make_set(Evens2,Odds,S2,M,G).
-
-output_list([]).
-
-output_list([H|[]]) :-
-write(H).
-
-output_list([H|T]) :-
-write(H),
-write(','),
-output_list(T).

@@ -1,4 +1,11 @@
-
+main :-
+set_prolog_flag(prompt_alternatives_on,groundness),
+between(0,10000,N1),
+between(0,10000,N2),
+between(0,10000,N3),
+between(0,10000,N4),
+interestingSet(N1,N2,N3,N4),
+output_list([N1,N2,N3,N4]).
 
 possibleInd(D) :- 
 integer(D),
@@ -46,13 +53,12 @@ inSet(N2,N3),
 inSet(N2,N4),
 inSet(N3,N4).
 
-main(W,X,Y,Z) :-
-between(0,10000,N1),
-between(0,10000,N2),
-between(0,10000,N3),
-between(0,10000,N4),
-interestingSet(N1,N2,N3,N4),
-W is N1,
-X is N2,
-Y is N3,
-Z is N4.
+output_list([]).
+
+output_list([H|[]]) :-
+write(H).
+
+output_list([H|T]) :-
+write(H),
+write(','),
+output_list(T).
