@@ -115,13 +115,16 @@ make_set(0,0,S,M,G) :-
 M = 'multiply',
 product_list(S,G2),
 G2 = G,
-write(S).
+output_list(S).
 
 make_set(0,0,S,M,G) :- 
 M = 'sum',
 add_list(S,G2),
 G2 = G,
-write(S).
+output_list(S).
+
+make_set(0,0,S,M,G) :-
+write('No Solution').
 
 make_set(0,Odds,S,M,G) :-
 Odds > 0,
@@ -139,3 +142,13 @@ evennum(N),
 unique(S2),
 Evens2 is Evens - 1,
 make_set(Evens2,Odds,S2,M,G).
+
+output_list([]).
+
+output_list([H|[]]) :-
+write(H).
+
+output_list([H|T]) :-
+write(H),
+write(','),
+output_list(T).
