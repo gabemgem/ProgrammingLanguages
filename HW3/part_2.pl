@@ -16,6 +16,7 @@ parseFind(L).
 
 %Horrendous Parser Code
 parseFind([Head | Tail]):-
+write(Tail), nl,
 write(Head),
 ((Head = 'Find') -> parseA(Tail); fail).
 
@@ -41,14 +42,15 @@ atom_number(Head, X), parseFirstType(X, Tail); fail.
 % Prints each word in list, but not sure if I can just assign SecondNum to 0 like that
 % Further functions use the format of Fn(even#s, odd#s, rest_of_input)
 parseFirstType(FirstNum, [Head | Tail]) :-
-write(Head), write(Tail),
-SecondNum is 0,
-((Head = 'even')-> parseAnd(FirstNum, SecondNum, Tail));
-((Head = 'odd')-> parseAnd(SecondNum, FirstNum, Tail)).
+write(Head),
+(Head = 'even')-> Evens is FirstNum, Odds is 0, parseAnd(Evens, Odds, Tail);
+(Head = 'odd')-> Odds is FirstNum, Evens is 0, parseAnd(Evens, Odds, Tail);
+fail.
 
 parseAnd(Evens, Odds, [Head, Tail]) :-
-((Head = 'and') -> parseSecondNum(Evens, Odds, Tail), write("Double"));
-((Head = 'integers') -> parseThat(Evens, Odds, Tail), write("Single"));
+write(Head), 
+((Head = 'and') -> parseSecondNum(Evens, Odds, Tail));
+((Head = 'integers') -> parseThat(Evens, Odds, Tail));
 fail.
 
 
