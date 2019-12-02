@@ -90,7 +90,6 @@ write(Head).
 
 
 
-%goodSet(Set,Target,Operation) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% I think the stuff below this is decent
@@ -128,7 +127,31 @@ between(0,128,X),
 product_list(Y,P2),
 Product is X * P2.
 
-%interestingSet(S) :- 
-%unique(S),
-%correctAmounts(Set,E,O),
-%goodSet(Set, Target, Operation).
+make_set(0,0,S,M,G) :- 
+M = 'multiply',
+product_list(S,G2),
+G2 = G,
+write(S).
+
+make_set(0,0,S,M,G) :- 
+M = 'sum',
+add_list(S,G2),
+G2 = G,
+write(S).
+
+make_set(0,Odds,S,M,G) :-
+Odds > 0,
+oddnum(N),
+[N|S] = S2,
+unique(S2),
+Odds2 is Odds - 1,
+make_set(0,Odds2,S2,M,G).
+
+%% params: num even numbers, num odd numbers, input set, method ('sum'/'multiply'), goal number
+make_set(Evens,Odds,S,M,G) :-
+Evens > 0,
+evennum(N),
+[N|S] = S2,
+unique(S2),
+Evens2 is Evens - 1,
+make_set(Evens2,Odds,S2,M,G).
