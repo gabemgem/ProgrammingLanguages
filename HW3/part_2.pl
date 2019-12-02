@@ -15,17 +15,17 @@ goodSet(Set,Target,Operation) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% I think the stuff below this is decent
-number(N) :- between(0,128,N).
+
 
 unique([]).
 unique([X|Y]) :- \+ memberchk(X,Y), unique(Y).
 
 evennum(N) :- 
-number(N),
+between(0,128,N),
 0 is N mod 2.
 
 oddnum(N) :-
-number(N),
+between(0,128,N),
 1 is N mod 2.
 
 correctAmounts([],E,O) :-
@@ -46,6 +46,7 @@ add_list(X,Sum) :- sum_list(X,Sum).
 
 product_list([],1).
 product_list([X|Y],Product) :-
+between(0,128,X),
 product_list(Y,P2),
 Product is X * P2.
 
