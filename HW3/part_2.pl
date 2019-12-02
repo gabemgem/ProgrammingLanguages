@@ -1,13 +1,6 @@
-%s(s(find,a,set,of,I,that,Op,to,N)) -> op(Op,I,N).
-%i(N,even) -> even(N).
-%i(N,odd) -> odd(N).
-%i(N1,and,N2) -> both(N1,N2).
-%both(N1,N2) -> even(N1),odd(N2).
-
-%op(sum,I,N) -> sum(i(I),number(N)).
-%op(multiply,I,N) -> mul(i(I),number(N)).
-%even(N) :- number(N).
-%odd(N) :- number(N).
+%% Gabe Maayan, Skylar Sang
+%% Programming Languages Fall 2019 PA3
+%% Written in ProLog
 
 main :- 
 read_line_to_codes(user_input,Cs), atom_codes(A, Cs), atomic_list_concat(L, ' ', A),
@@ -15,74 +8,65 @@ parseFind(L).
 
 
 %Horrendous Parser Code
+
+invalid :- write('Invalid String'), fail.
 parseFind([Head | Tail]):-
-write(Tail), nl,
-write(Head),
-((Head = 'Find') -> parseA(Tail); fail).
+((Head = 'Find') -> parseA(Tail); invalid).
 
 parseA([Head | Tail]):-
-write(Head),
-((Head = 'a') -> parseSet(Tail); fail).
+((Head = 'a') -> parseSet(Tail); invalid).
 
 parseSet([Head | Tail]):-
-write(Head),
-((Head = 'set') -> parseOf(Tail); fail).
+((Head = 'set') -> parseOf(Tail); invalid).
 
 parseOf([Head | Tail]):-
-write(Head),
-((Head = 'of') -> parseFirstNum(Tail); fail).
+((Head = 'of') -> parseFirstNum(Tail); invalid).
 
 %use atom_number to set X to the integer version of Head
 parseFirstNum([Head | Tail]):-
-write(Head),
-atom_number(Head, X), parseFirstType(X, Tail); fail.
+atom_number(Head, X), parseFirstType(X, Tail); invalid.
 
-
-%%%%%%%%%%%%%%% PROBLEM AREA%%%%%%%%%%%%%%%%%%%%%%%
-% Prints each word in list, but not sure if I can just assign SecondNum to 0 like that
-% Further functions use the format of Fn(even#s, odd#s, rest_of_input)
 parseFirstType(FirstNum, [Head | Tail]) :-
-write(Head),
 (Head = 'even')-> Evens is FirstNum, Odds is 0, parseAnd(Evens, Odds, Tail);
 (Head = 'odd')-> Odds is FirstNum, Evens is 0, parseAnd(Evens, Odds, Tail);
-fail.
+invalid.
 
-parseAnd(Evens, Odds, [Head, Tail]) :-
-write(Head), 
+parseAnd(Evens, Odds, [Head | Tail]) :-
 ((Head = 'and') -> parseSecondNum(Evens, Odds, Tail));
 ((Head = 'integers') -> parseThat(Evens, Odds, Tail));
-fail.
+invalid.
 
+parseSecondNum(Evens, Odds, [Head | Tail]) :-
+(Odds = 0, Evens > 0) -> atom_number(Head, X), parseSecondType(Evens, X, Tail);
+(Odds > 0, Evens = 0) -> atom_number(Head, X), parseSecondType(X, Odds, Tail); invalid.
 
+parseSecondType(Evens, Odds, [Head | Tail]) :-
+(Head = 'even'; Head = 'odd') -> parseIntegers(Evens, Odds, Tail); invalid.
 
-parseIntegers(Evens, Odds, [Head, Tail]) :-
-write(Head),
-(Head = 'integers') -> parseThat(Evens, Odds, Tail); fail.
+parseIntegers(Evens, Odds, [Head | Tail]) :-
+(Head = 'integers') -> parseThat(Evens, Odds, Tail); invalid.
 
-parseThat(Evens, Odds, [Head, Tail]) :-
-write(Head), write(Tail),
-(Head = 'that') -> parseOp(Evens, Odds, Tail); fail.
+parseThat(Evens, Odds, [Head | Tail]) :-
+(Head = 'that') -> parseOp(Evens, Odds, Tail); invalid.
 
-parseOp(Evens, Odds, [Head, Tail]) :-
-write(Head),
+parseOp(Evens, Odds, [Head | Tail]) :-
 ((Head = 'sum') -> parseSumTo(Evens, Odds, Tail));
 ((Head = 'multiply') -> parseMulTo(Evens, Odds, Tail));
-fail.
+invalid.
 
-parseSumTo(Evens, Odds, [Head, Tail]) :-
-write(Head),
-(Head = 'to') -> parseSum(Evens, Odds, Tail); fail.
+parseSumTo(Evens, Odds, [Head | Tail]) :-
+(Head = 'to') -> parseSum(Evens, Odds, Tail); invalid.
 
-parseMulTo(Evens, Odds, [Head, Tail]) :-
-write(Head),
-(Head = 'to') -> parseMul(Evens, Odds, Tail); fail.
+parseMulTo(Evens, Odds, [Head | Tail]) :-
+(Head = 'to') -> parseMul(Evens, Odds, Tail); invalid.
 
-%end of horrendous parsing, still need to check if the command continues past this last number, but thats a later problem
-parseSum(Evens, Odds, Head) :-
-write(Head).
+parseSum(Evens, Odds, [Head | Tail]) :- 
+atom_number(Head, X),
+(Tail = [])->make_set(Evens, Odds, [], 'sum', X); invalid.
 
-parseMul(Evens, Odds, Head) :-
-write(Head).
+parseMul(Evens, Odds, [Head | Tail]) :-
+atom_number(Head, X),
+(Tail = [])->make_set(Evens, Odds, [], 'multiply', X); invalid.
 
 
 
