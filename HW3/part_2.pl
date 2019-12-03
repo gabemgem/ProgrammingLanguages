@@ -67,11 +67,11 @@ parseMulTo(Evens, Odds, [Head | Tail]) :-
 % Check to see if this is end of sentence, then perform set operations
 parseSum(Evens, Odds, [Head | Tail]) :- 
 atom_number(Head, X),
-(Tail = [])->make_set(Evens, Odds, [], 'sum', X); invalid.
+(Tail = [])->not(make_set(Evens, Odds, [], 'sum', X)), write('No Solution').
 
 parseMul(Evens, Odds, [Head | Tail]) :-
 atom_number(Head, X),
-(Tail = [])->make_set(Evens, Odds, [], 'multiply', X); invalid.
+(Tail = [])->not(make_set(Evens, Odds, [], 'multiply', X)), write('No Solution').
 
 
 %% Checks that every element in a list is unique
@@ -126,9 +126,6 @@ M = 'sum',
 add_list(S,G2),
 G2 = G,
 output_list(S).
-
-make_set(0,0,S,M,G) :-
-write('No Solution').
 
 make_set(0,Odds,S,M,G) :-
 Odds > 0,
