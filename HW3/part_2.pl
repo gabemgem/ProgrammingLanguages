@@ -2,15 +2,15 @@
 %% Programming Languages Fall 2019 PA3
 %% Written in ProLog
 
-
-main :- 
+% Accept Input str and split atoms to array 
+main([S]) :- 
 set_prolog_flag(prompt_alternatives_on,groundness),
-read_line_to_codes(user_input,Cs), atom_codes(A, Cs), atomic_list_concat(L, ' ', A),
+atomic_list_concat(L, ' ', S),
 parseFind(L).
 
 
-%Horrendous Parser Code
-
+% Brute-Force Parser Code
+% Invalid String fail handler function
 invalid :- write('Invalid String'), fail.
 parseFind([Head | Tail]):-
 ((Head = 'Find') -> parseA(Tail); invalid).
@@ -24,18 +24,20 @@ parseSet([Head | Tail]):-
 parseOf([Head | Tail]):-
 ((Head = 'of') -> parseFirstNum(Tail); invalid).
 
-%use atom_number to set X to the integer version of Head
+% Use atom_number to set X to get the integer version of Head
 parseFirstNum([Head | Tail]):-
-atom_number(Head, X), parseFirstType(X, Tail); invalid.
+atom_number(Head, X) -> parseFirstType(X, Tail); invalid.
 
+% Branch depending on first type
 parseFirstType(FirstNum, [Head | Tail]) :-
 (Head = 'even')-> Evens is FirstNum, Odds is 0, parseAnd(Evens, Odds, Tail);
 (Head = 'odd')-> Odds is FirstNum, Evens is 0, parseAnd(Evens, Odds, Tail);
 invalid.
 
+%Check to see if both sets of numbers will be used, otherwise leave 2nd type as 0
 parseAnd(Evens, Odds, [Head | Tail]) :-
 ((Head = 'and') -> parseSecondNum(Evens, Odds, Tail));
-((Head = 'integers') -> parseThat(Evens, Odds, Tail));
+((Head = 'integers') -> parseThat(Evens, Odds, Tail)); 
 invalid.
 
 parseSecondNum(Evens, Odds, [Head | Tail]) :-
@@ -62,6 +64,7 @@ parseSumTo(Evens, Odds, [Head | Tail]) :-
 parseMulTo(Evens, Odds, [Head | Tail]) :-
 (Head = 'to') -> parseMul(Evens, Odds, Tail); invalid.
 
+% Check to see if this is end of sentence, then perform set operations
 parseSum(Evens, Odds, [Head | Tail]) :- 
 atom_number(Head, X),
 (Tail = [])->make_set(Evens, Odds, [], 'sum', X); invalid.
